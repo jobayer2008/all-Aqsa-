@@ -2,734 +2,514 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>আল আকসা ফাউন্ডেশন | মদন, নেত্রকোনা</title>
-    <!-- Google Fonts & Noto Sans Bengali -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 (free) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobayer Ahmed | প্রোগ্রামার - সিভি পোর্টফোলিও</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.25s ease, color 0.2s ease, border-color 0.2s;
-        }
-
-        :root {
-            --primary-green: #006A4E;
-            --primary-red: #E2132E;
-            --dark-bg: #0A1F1A;
-            --light-bg: #F9FBF9;
-            --card-bg-light: #ffffff;
-            --card-bg-dark: #1e2a25;
-            --text-light: #1F2A24;
-            --text-dark: #EFF5F0;
-            --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
-            --shadow-md: 0 20px 25px -12px rgba(0, 0, 0, 0.1);
-            --border-radius: 1.25rem;
-            --transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
         body {
-            font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
-            background-color: var(--light-bg);
-            color: var(--text-light);
-            line-height: 1.5;
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            scroll-behavior: smooth;
         }
 
-        body.dark {
-            --light-bg: #0F1A16;
-            --card-bg-light: #1F2C26;
-            --text-light: #EFF5F0;
-            background-color: #0F1A16;
-            color: #EFF5F0;
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
         }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background-color: var(--primary-green);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 60px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 1rem;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary-green);
-            color: var(--primary-green);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary-green);
-            color: white;
-        }
-
-        .btn-red {
-            background-color: var(--primary-red);
-        }
-
-        .btn-red:hover {
-            background-color: #b01028;
-            transform: translateY(-3px);
+        ::-webkit-scrollbar-thumb {
+            background: #1abc9c;
+            border-radius: 10px;
         }
 
         .navbar {
-            background: var(--card-bg-light);
-            backdrop-filter: blur(0px);
-            box-shadow: var(--shadow-sm);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 12px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            padding: 15px 0;
         }
-
-        .nav-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .logo-area h2 {
-            color: var(--primary-green);
-            font-size: 1.7rem;
+        .navbar-brand {
             font-weight: 800;
-        }
-
-        .logo-area p {
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            font-weight: 600;
-            color: currentColor;
-        }
-
-        .menu-icon {
-            display: none;
             font-size: 1.8rem;
-            cursor: pointer;
+            color: #2c3e50;
         }
-
-        .hero-slider {
-            position: relative;
-            border-radius: 2rem;
-            overflow: hidden;
-            margin: 2rem 0;
-            min-height: 420px;
-            background: linear-gradient(135deg, #0a3b2e, #023020);
+        .navbar-brand span {
+            color: #1abc9c;
         }
-
-        .slider-container {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .slide {
-            min-width: 100%;
-            background-size: cover;
-            background-position: center;
-            height: 460px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .slide-content {
-            text-align: center;
-            color: white;
-            background: rgba(0, 0, 0, 0.55);
-            padding: 2rem;
-            border-radius: 2rem;
-            backdrop-filter: blur(3px);
-        }
-
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .card {
-            background: var(--card-bg-light);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            text-align: center;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .card-icon {
-            font-size: 2.8rem;
-            color: var(--primary-green);
-            margin-bottom: 1rem;
-        }
-
-        .ticker-wrap {
-            background: var(--primary-red);
-            color: white;
-            padding: 12px 0;
-            border-radius: 60px;
-            margin: 30px 0;
-            overflow: hidden;
-        }
-
-        .ticker {
-            display: inline-block;
-            white-space: nowrap;
-            animation: scrollTicker 22s linear infinite;
+        .nav-link {
             font-weight: 600;
+            color: #2c3e50;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #1abc9c !important;
         }
 
-        @keyframes scrollTicker {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        .hero {
+            background: linear-gradient(135deg, #ffffff 0%, #f2f6f9 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
         }
-
-        .stats-section {
-            background: var(--primary-green);
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #2c3e50;
+        }
+        .hero .highlight {
+            color: #1abc9c;
+            border-bottom: 3px solid #1abc9c;
+            display: inline-block;
+        }
+        .hero .typed-text {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #34495e;
+        }
+        .hero .btn-custom {
+            background: #1abc9c;
             color: white;
-            border-radius: 2rem;
-            padding: 3rem 1rem;
-            margin: 3rem 0;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-block;
+            border: none;
+        }
+        .hero .btn-custom:hover {
+            background: #16a085;
+            transform: translateY(-3px);
+        }
+        .profile-container {
+            background: #ffffff;
+            border-radius: 50%;
+            padding: 15px;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+            max-width: 300px;
+            margin: auto;
             text-align: center;
         }
-
-        .stats-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            gap: 2rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.8rem;
-            font-weight: 800;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .gallery-card img {
+        .profile-img {
             width: 100%;
-            height: 200px;
+           border-radius: 50%;
+            aspect-ratio: 1/1;
             object-fit: cover;
-            border-radius: 1rem;
+            border: 4px solid #fff;
+            background: #e9ecef;
         }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
+        .upload-btn-wrapper {
+            margin-top: 15px;
         }
-
-        .modal-content {
-            background: var(--card-bg-light);
-            max-width: 500px;
-            width: 90%;
-            border-radius: 2rem;
-            padding: 2rem;
-        }
-
-        .theme-toggle, .lang-toggle {
-            background: none;
+        .upload-btn {
+            background: #1abc9c;
+            color: white;
             border: none;
-            font-size: 1.4rem;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
             cursor: pointer;
-            margin: 0 8px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-
-        @media (max-width: 900px) {
-            .nav-links {
-                display: none;
-                width: 100%;
-                flex-direction: column;
-                background: var(--card-bg-light);
-                padding: 1rem;
-                border-radius: 1rem;
-                margin-top: 1rem;
-            }
-            .nav-links.show {
-                display: flex;
-            }
-            .menu-icon {
-                display: block;
-            }
+        .upload-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            opacity: 0.7;
         }
-
-        footer {
-            background: var(--card-bg-dark);
-            color: #ccc;
-            padding: 3rem 0;
-            margin-top: 3rem;
-            border-radius: 2rem 2rem 0 0;
+        .locked-badge {
+            font-size: 0.7rem;
+            background: #e74c3c;
+            color: white;
+            border-radius: 20px;
+            padding: 2px 10px;
+            display: inline-block;
+            margin-top: 8px;
         }
-
-        input, textarea, select {
+        .section-padding {
+            padding: 80px 0;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background: #1abc9c;
+        }
+        .about-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+        .contact-info i {
+            width: 40px;
+            color: #1abc9c;
+            font-size: 1.3rem;
+        }
+        .skill-item {
+            margin-bottom: 25px;
+        }
+        .skill-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .progress {
+            height: 8px;
+            border-radius: 10px;
+            background-color: #e9ecef;
+        }
+        .progress-bar {
+            background-color: #1abc9c;
+            border-radius: 10px;
+        }
+        .exp-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border-left: 4px solid #1abc9c;
+        }
+        .exp-card h4 {
+            font-weight: 700;
+        }
+        .exp-date {
+            color: #1abc9c;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+        .social-card {
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            background: white;
+        }
+        .social-card img {
             width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 1rem;
-            border: 1px solid #ccc;
-            background: var(--card-bg-light);
-            color: currentColor;
+            height: 220px;
+            object-fit: cover;
+            transition: 0.5s;
+            display: block;
         }
-
-        .admin-btn {
-            margin: 1rem 0;
-            background: #2c5f2d;
+        .social-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.12);
         }
-
-        .delete-project {
-            background: #b91c1c;
-            margin-top: 10px;
-            font-size: 0.8rem;
-            padding: 6px 12px;
+        .contact-form {
+            background: white;
+            border-radius: 28px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        }
+        .form-control {
+            border-radius: 50px;
+            padding: 12px 20px;
+            border: 1px solid #dee2e6;
+            margin-bottom: 20px;
+        }
+        textarea.form-control {
+            border-radius: 25px;
+        }
+        .btn-submit {
+            background: #1abc9c;
+            color: white;
+            border-radius: 50px;
+            padding: 12px 35px;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+        }
+        .btn-submit:hover {
+            background: #16a085;
+        }
+        .footer {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 30px 0;
+            text-align: center;
+        }
+        .footer a {
+            color: #1abc9c;
+            text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero .typed-text { font-size: 1.2rem; }
+            .section-padding { padding: 50px 0; }
+            .profile-container { max-width: 220px; }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container nav-container">
-            <div class="logo-area">
-                <h2><i class="fas fa-mosque"></i> আল আকসা ফাউন্ডেশন</h2>
-                <p>মদন, নেত্রকোনা | মানবতার সেবায়</p>
-            </div>
-            <div class="menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
-            <div class="nav-links" id="navLinks">
-                <a href="#home">হোম</a>
-                <a href="#about">আমাদের সম্পর্কে</a>
-                <a href="#services">সেবা সমূহ</a>
-                <a href="#notice">নোটিশ বোর্ড</a>
-                <a href="#projects">প্রকল্প / কার্যক্রম</a>
-                <a href="#gallery">গ্যালারি</a>
-                <a href="#contact">যোগাযোগ</a>
-                <button class="theme-toggle" id="darkModeToggle"><i class="fas fa-moon"></i></button>
-                <button class="lang-toggle" id="langToggle"><i class="fas fa-language"></i> EN</button>
-                <button class="btn btn-red" id="memberBtn" style="padding: 8px 18px;"><i class="fas fa-user-plus"></i> সদস্য হোন</button>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Jubayer<span>CV</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">হোম</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">পরিচয়</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">দক্ষতা</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">অভিজ্ঞতা</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">গ্যালারি</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">যোগাযোগ</a></li>
+                </ul>
             </div>
         </div>
     </nav>
 
-    <main class="container" id="home">
-        <!-- Hero Slider -->
-        <div class="hero-slider" id="heroSlider">
-            <div class="slider-container" id="sliderContainer">
-                <div class="slide" style="background-image: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('https://picsum.photos/id/104/1600/600');">
-                    <div class="slide-content"><h1>আল আকসা ফাউন্ডেশন</h1><p>মানুষের কল্যাণে, সমাজের উন্নয়নে</p></div>
+    <!-- Hero Section with Lockable Profile Upload -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7" data-aos="fade-right">
+                    <h1<span class="highlight">Jobayer Ahmad</span></h1>
+                    <div class="typed-text mb-3">
+                        একজন <span id="element" style="color:#1abc9c; font-weight:700;"></span>
+                    </div>
+                    <p class="lead text-muted">মদন, নেত্রকোনা, বাংলাদেশ | প্রোগ্রামিং ও ওয়েব ডেভেলপমেন্টে দক্ষ</p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="#contact" class="btn-custom"><i class="fas fa-paper-plane me-2"></i>ইমেইল করুন</a>
+                        <a href="tel:+8801795700614" class="btn-custom" style="background:#34495e;"><i class="fas fa-phone-alt me-2"></i>কল করুন</a>
+                    </div>
                 </div>
-                <div class="slide" style="background-image: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('https://picsum.photos/id/169/1600/600');">
-                    <div class="slide-content"><h1>সেবা ও সহানুভূতি</h1><p>আপনার সহযোগিতায় নতুন স্বপ্ন</p></div>
-                </div>
-                <div class="slide" style="background-image: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('https://picsum.photos/id/123/1600/600');">
-                    <div class="slide-content"><h1>এগিয়ে চলা, বদলে দেওয়া</h1><p>আমাদের সাথে থাকুন</p></div>
+                <div class="col-lg-5 text-center" data-aos="fade-left">
+                    <div class="profile-container">
+                        <img id="profileImage" class="profile-img" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile Picture">
+                        <div class="upload-btn-wrapper" id="uploadWrapper">
+                            <button class="upload-btn" id="uploadBtn" type="button"><i class="fas fa-upload"></i> ছবি পরিবর্তন</button>
+                            <input type="file" id="profileUpload" accept="image/*" style="display: none;">
+                            <div id="lockStatus" class="locked-badge" style="display: none;"><i class="fas fa-lock"></i> লক করা হয়েছে</div>
+                        </div>
+                        <small class="text-muted d-block mt-2" id="hintText"></small>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- About Section -->
-        <section id="about">
-            <h2 style="color: var(--primary-green); margin: 2rem 0 0.5rem;"><i class="fas fa-info-circle"></i> আমাদের সম্পর্কে</h2>
-            <p class="about-text">আল আকসা ফাউন্ডেশন মদন, নেত্রকোনা থেকে সারা বাংলাদেশে মানবিক ও উন্নয়নমূলক কাজ করে যাচ্ছে। ২০১৫ সালে প্রতিষ্ঠিত এই সংস্থা অসহায়, দুস্থ ও পিছিয়ে পড়া জনগোষ্ঠীর কল্যাণে শিক্ষা, স্বাস্থ্য, ও অর্থনৈতিক স্বাবলম্বী কর্মকাণ্ড পরিচালনা করে। আমাদের লক্ষ্য একটি শোষণমুক্ত সমাজ গড়ে তোলা।</p>
-        </section>
-
-        <!-- গুরুত্বপূর্ণ সেবাসমূহ কার্ড -->
-        <section>
-            <h2 style="margin-top: 3rem;"><i class="fas fa-hand-holding-heart"></i> গুরুত্বপূর্ণ সেবা</h2>
-            <div class="grid-cards">
-                <div class="card"><i class="fas fa-graduation-cap card-icon"></i><h3>শিক্ষা বৃত্তি</h3><p>মেধাবী ও অসহায় শিক্ষার্থীদের বৃত্তি প্রদান</p></div>
-                <div class="card"><i class="fas fa-hospital-user card-icon"></i><h3>স্বাস্থ্য সেবা</h3><p>বিনামূল্যে স্বাস্থ্য ক্যাম্প ও চিকিৎসা সহায়তা</p></div>
-                <div class="card"><i class="fas fa-hand-holding-usd card-icon"></i><h3>আর্থিক সহায়তা</h3><p>দরিদ্র পরিবারের জন্য অনুদান ও ক্ষুদ্র ঋণ</p></div>
-                <div class="card"><i class="fas fa-water card-icon"></i><h3>বিশুদ্ধ পানি</h3><p>নলকূপ ও পানি বিশুদ্ধকরণ প্রকল্প</p></div>
+    <!-- About + Contact Info -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2>পরিচিতি ও যোগাযোগ</h2>
             </div>
-        </section>
-
-        <!-- নোটিশ টিকার (শুধু স্ক্রলিং বার্তা, কোনো PDF বা নিউজ কার্ড নেই) -->
-        <section id="notice">
-            <h2><i class="fas fa-bullhorn"></i> নোটিশ বোর্ড</h2>
-            <div class="ticker-wrap"><div class="ticker">🔔 জরুরি নোটিশ: আগামী ২০ ডিসেম্বর বৃক্ষরোপণ কর্মসূচি। 🔔 নতুন প্রকল্পের ঘোষণা: বৃত্তি আবেদন শুরু ০১ জানুয়ারি। 🔔 ঈদ উপহার বিতরণের তারিখ ২৫ মার্চ।</div></div>
-        </section>
-
-        <!-- সেবা বিভাগ (অনলাইন আবেদন, সনদ যাচাই ইত্যাদি) - ডাউনলোড সেন্টার বাদ -->
-        <section id="services">
-            <h2><i class="fas fa-cogs"></i> সেবা বিভাগসমূহ</h2>
-            <div class="grid-cards">
-                <div class="card"><i class="fas fa-file-alt card-icon"></i><h3>অনলাইন আবেদন</h3><p>বৃত্তি, অনুদান ও প্রকল্পে আবেদন করুন</p></div>
-                <div class="card"><i class="fas fa-certificate card-icon"></i><h3>সনদ যাচাই</h3><p>প্রতিষ্ঠানের প্রদানকৃত সনদের সত্যতা যাচাই করুন</p></div>
-                <div class="card"><i class="fas fa-comment-dots card-icon"></i><h3>অভিযোগ দাখিল</h3><p>অভিযোগ জানাতে ফর্ম পূরণ করুন</p></div>
-                <div class="card"><i class="fas fa-phone-alt card-icon"></i><h3>হেল্পলাইন</h3><p>কল করুন ১৬৩৬৬ (স্থানীয়) অথবা হটলাইন</p></div>
-            </div>
-        </section>
-
-        <!-- প্রকল্প / কার্যক্রম + আপলোড অপশন -->
-        <section id="projects">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                <h2><i class="fas fa-chart-line"></i> আমাদের প্রকল্পসমূহ</h2>
-                <button class="btn admin-btn" id="uploadActivityBtn"><i class="fas fa-cloud-upload-alt"></i> নতুন কার্যক্রম আপলোড করুন</button>
-            </div>
-            <div id="projectsContainer" class="grid-cards">
-                <!-- ডিফল্ট প্রকল্প (স্থির) -->
-                <div class="card project-item" data-id="default1"><img src="https://picsum.photos/id/20/300/150" style="width:100%; border-radius:1rem;"><h3>গ্রামীণ স্কুল প্রকল্প</h3><p>নেত্রকোনার ৫টি গ্রামে প্রাথমিক বিদ্যালয় স্থাপন।</p></div>
-                <div class="card project-item" data-id="default2"><img src="https://picsum.photos/id/42/300/150" style="width:100%; border-radius:1rem;"><h3>মাতৃত্বকালীন স্বাস্থ্য সহায়তা</h3><p>গর্ভবতী মায়েদের সেবা ও পুষ্টি বিতরণ।</p></div>
-                <div class="card project-item" data-id="default3"><img src="https://picsum.photos/id/29/300/150" style="width:100%; border-radius:1rem;"><h3>বন্যা ও দুর্যোগ পুনর্বাসন</h3><p>বন্যাপরবর্তী পুনর্বাসন ও চিকিৎসা সেবা।</p></div>
-            </div>
-        </section>
-
-        <!-- গ্যালারি: শুধু ছবি, কোন ভিডিও নেই -->
-        <section id="gallery">
-            <h2><i class="fas fa-images"></i> গ্যালারি</h2>
-            <div class="gallery-grid">
-                <div class="gallery-card"><img src="https://picsum.photos/id/103/300/200" alt="ইফতার মাহফিল"><p>ইফতার মাহফিল</p></div>
-                <div class="gallery-card"><img src="https://picsum.photos/id/106/300/200" alt="চিকিৎসা ক্যাম্প"><p>চিকিৎসা ক্যাম্প</p></div>
-                <div class="gallery-card"><img src="https://picsum.photos/id/130/300/200" alt="বৃত্তি বিতরণ"><p>বৃত্তি বিতরণ</p></div>
-                <div class="gallery-card"><img src="https://picsum.photos/id/169/300/200" alt="সচেতনতামূলক সভা"><p>সচেতনতামূলক সভা</p></div>
-            </div>
-        </section>
-
-        <!-- পরিসংখ্যান -->
-        <div class="stats-section" id="stats">
-            <div class="stats-grid">
-                <div class="stat-item"><i class="fas fa-users fa-2x"></i><h3 class="counter" data-target="25000">0</h3><p>মোট সেবাগ্রহীতা</p></div>
-                <div class="stat-item"><i class="fas fa-check-circle fa-2x"></i><h3 class="counter" data-target="12500">0</h3><p>সম্পন্ন আবেদন</p></div>
-                <div class="stat-item"><i class="fas fa-building fa-2x"></i><h3 class="counter" data-target="18">0</h3><p>চলমান প্রকল্প</p></div>
-                <div class="stat-item"><i class="fas fa-map-marked-alt fa-2x"></i><h3>সারা বাংলাদেশ</h3><p>সেবা এলাকা</p></div>
-            </div>
-        </div>
-
-        <!-- যোগাযোগ + ম্যাপ ও ফর্ম -->
-        <section id="contact" style="margin-top: 2rem;">
-            <h2><i class="fas fa-address-card"></i> যোগাযোগ করুন</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                <div>
-                    <iframe src="https://maps.google.com/maps?q=Modon%2C%20Netrokona%2C%20Bangladesh&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0; border-radius:1.5rem;" allowfullscreen=""></iframe>
-                    <p><i class="fas fa-map-marker-alt"></i> <strong>ঠিকানা:</strong> আল আকসা ফাউন্ডেশন, মদন সদর, নেত্রকোনা, বাংলাদেশ</p>
-                    <p><i class="fas fa-phone"></i> ফোন: +৮৮০ ১৭৮৯-১২৩৪৫৬</p>
-                    <p><i class="fas fa-envelope"></i> ইমেইল: ja0743358@gmail.com</p>
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="fade-up">
+                    <div class="about-card">
+                        <h3><i class="fas fa-user-circle me-2" style="color:#1abc9c;"></i> ব্যক্তিগত তথ্য</h3>
+                        <p><strong>নাম:</strong> মোঃ জুবায়ের আহমেদ (Md. Jubayer Ahmed)</p>
+                        <p><strong>ঠিকানা:</strong> মদন, নেত্রকোনা, বাংলাদেশ</p>
+                        <p><strong>পেশা:</strong> প্রোগ্রামার ও ওয়েব ডেভেলপার</p>
+                        <hr>
+                        <div class="contact-info">
+                            <p><i class="fas fa-envelope"></i> ja0743358@gmail.com</p>
+                            <p><i class="fas fa-phone-alt"></i> +8801795700614</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Madan, Netrokona, Bangladesh</p>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h3>পত্র পাঠান</h3>
-                    <form id="contactForm">
-                        <input type="text" placeholder="আপনার নাম" id="contactName" required>
-                        <input type="email" placeholder="ইমেইল" id="contactEmail" required>
-                        <textarea rows="3" placeholder="বার্তা" id="contactMsg"></textarea>
-                        <button type="submit" class="btn">পাঠান <i class="fas fa-paper-plane"></i></button>
-                    </form>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="about-card">
+                        <h3><i class="fas fa-laptop-code me-2" style="color:#1abc9c;"></i> আমার লক্ষ্য</h3>
+                        <p>আমি একজন প্রোগ্রামার এবং ওয়েব ডেভেলপার। আধুনিক প্রযুক্তি ব্যবহার করে সমস্যার সমাধান এবং দক্ষ কোড লিখতে ভালোবাসি। সর্বদা নতুন কিছু শিখতে ও প্রয়োগ করতে আগ্রহী। ক্লায়েন্টের চাহিদা অনুযায়ী গতিশীল ও রেসপনসিভ ওয়েব অ্যাপ্লিকেশন তৈরি করাই আমার প্রধান দায়িত্ব।</p>
+                        <div class="mt-3">
+                            <span class="badge bg-success bg-opacity-10 text-dark p-2 me-2"><i class="fab fa-python"></i> Python</span>
+                            <span class="badge bg-success bg-opacity-10 text-dark p-2 me-2"><i class="fab fa-js"></i> JavaScript</span>
+                            <span class="badge bg-success bg-opacity-10 text-dark p-2 me-2"><i class="fab fa-react"></i> React</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
-
-        <!-- FAQ -->
-        <section style="margin-top: 3rem;">
-            <h2>সাধারণ জিজ্ঞাসা (FAQ)</h2>
-            <div class="card" style="text-align:left;"><h3>❓ আমি কীভাবে সদস্য হতে পারি?</h3><p>‘সদস্য হোন’ বাটনে ক্লিক করে ফর্ম পূরণ করুন। আবেদন জমা দিলে আমাদের টিম যোগাযোগ করবে।</p></div>
-            <div class="card" style="text-align:left;"><h3>❓ অনুদান প্রদানের উপায়?</h3><p>বিকাশ, নগদ বা ব্যাংক ট্রান্সফারের মাধ্যমে আপনি সহায়তা করতে পারেন। বিস্তারিত জানতে হেল্পলাইনে যোগাযোগ করুন।</p></div>
-            <div class="card" style="text-align:left;"><h3>❓ সনদ যাচাই প্রক্রিয়া কতদিন লাগে?</h3><p>সাধারণত ৭ কার্যদিবসের মধ্যে যাচাই সম্পন্ন হয়।</p></div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
-            <div><h4>আল আকসা ফাউন্ডেশন</h4><p>মানবতার বাতিঘর</p><div><i class="fab fa-facebook"></i> <i class="fab fa-twitter"></i> <i class="fab fa-youtube"></i> <i class="fab fa-instagram"></i></div></div>
-            <div><h4>দরকারী লিংক</h4><a href="#">স্বেচ্ছাসেবক</a><br><a href="#">অভিযোগ ফর্ম</a><br><a href="#">সদস্য লগইন</a></div>
-            <div><h4>ভিজিটর কাউন্ট</h4><p id="visitorCount">০০০০</p><input type="text" id="searchInput" placeholder="🔍 সার্চ করুন..." style="background: #2d3e36; color:white;"></div>
         </div>
-        <div class="container" style="text-align:center; margin-top: 2rem;">&copy; ২০২৫ আল আকসা ফাউন্ডেশন, সর্বস্বত্ব সংরক্ষিত</div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section-padding" style="background:#f1f5f9;">
+        <div class="container">
+            <div class="section-title">
+                <h2>প্রোগ্রামিং দক্ষতা</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 mx-auto" data-aos="fade-up">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="skill-item"><div class="skill-title">HTML5 & CSS3</div><div class="progress"><div class="progress-bar" style="width: 92%"></div></div></div>
+                            <div class="skill-item"><div class="skill-title">JavaScript (ES6+)</div><div class="progress"><div class="progress-bar" style="width: 85%"></div></div></div>
+                            <div class="skill-item"><div class="skill-title">React.js</div><div class="progress"><div class="progress-bar" style="width: 78%"></div></div></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="skill-item"><div class="skill-title">Python / Django</div><div class="progress"><div class="progress-bar" style="width: 88%"></div></div></div>
+                            <div class="skill-item"><div class="skill-title">Node.js / Express</div><div class="progress"><div class="progress-bar" style="width: 75%"></div></div></div>
+                            <div class="skill-item"><div class="skill-title">MySQL & MongoDB</div><div class="progress"><div class="progress-bar" style="width: 82%"></div></div></div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-5"><p><i class="fas fa-code-branch"></i> গিট ও ভার্সন কন্ট্রোল, অ্যালগরিদম, API ডিজাইন - দক্ষতা অর্জিত</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="section-padding">
+        <div class="container">
+            <div class="section-title"><h2>কর্ম অভিজ্ঞতা</h2></div>
+            <div class="row">
+                <div class="col-md-6" data-aos="fade-right"><div class="exp-card"><div class="exp-date"><i class="far fa-calendar-alt"></i> জানুয়ারি ২০২৩ - বর্তমান</div><h4>ফ্রিল্যান্স ওয়েব ডেভেলপার</h4><p class="text-muted">আন্তর্জাতিক মার্কেটপ্লেস (Upwork/Fiverr)</p><p>কাস্টম ওয়েবসাইট ডিজাইন ও ডেভেলপ, ফুল-স্ট্যাক প্রজেক্ট ডেলিভারি।</p></div></div>
+                <div class="col-md-6" data-aos="fade-left"><div class="exp-card"><div class="exp-date"><i class="far fa-calendar-alt"></i> মার্চ ২০২২ - ডিসেম্বর ২০২৪</div><h4>প্রোগ্রামিং প্রশিক্ষক</h4><p class="text-muted">স্থানীয় আইটি ইনস্টিটিউট, নেত্রকোনা</p><p>Python, JavaScript ও ওয়েব ডেভেলপমেন্ট কোর্স পরিচালনা।</p></div></div>
+                <div class="col-md-6" data-aos="fade-right" data-aos-delay="100"><div class="exp-card"><div class="exp-date"><i class="far fa-calendar-alt"></i> জুন ২০২১ - ফেব্রুয়ারি ২০২৩</div><h4>জুনিয়র সফটওয়্যার ইঞ্জিনিয়ার</h4><p class="text-muted">রিমোট স্টার্টআপ (US Based)</p><p>ফ্রন্টএন্ড ও ব্যাকএন্ড, API ডেভেলপমেন্ট।</p></div></div>
+                <div class="col-md-6" data-aos="fade-left" data-aos-delay="100"><div class="exp-card"><div class="exp-date"><i class="far fa-calendar-alt"></i> অক্টোবর ২০২০ - মে ২০২১</div><h4>ওয়েব ডেভেলপমেন্ট ইন্টার্ন</h4><p class="text-muted">বাংলাদেশ আইটি সেন্টার</p><p>লাইভ প্রজেক্টে কাজ, ওয়ার্ডপ্রেস কাস্টমাইজেশন।</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Gallery (Always Visible) -->
+    <section id="gallery" class="section-padding" style="background:#f8f9fc;">
+        <div class="container">
+            <div class="section-title"><h2>সোশ্যাল মিডিয়া গ্যালারি</h2><p class="text-muted">ডিজিটাল ক্রিয়েটিভিটির কিছু মুহূর্ত</p></div>
+            <div class="social-grid" data-aos="fade-up">
+                <div class="social-card"><img src="https://picsum.photos/id/20/400/300" alt="Social media"></div>
+                <div class="social-card"><img src="https://picsum.photos/id/26/400/300" alt="Instagram"></div>
+                <div class="social-card"><img src="https://picsum.photos/id/96/400/300" alt="Twitter"></div>
+                <div class="social-card"><img src="https://picsum.photos/id/155/400/300" alt="LinkedIn"></div>
+                <div class="social-card"><img src="https://picsum.photos/id/169/400/300" alt="YouTube"></div>
+                <div class="social-card"><img src="https://picsum.photos/id/29/400/300" alt="Snapchat"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="section-title"><h2>আমাকে ইমেইল করুন</h2></div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8" data-aos="zoom-in">
+                    <div class="contact-form">
+                        <form id="emailForm">
+                            <div class="row"><div class="col-md-6"><input type="text" class="form-control" id="name" placeholder="আপনার নাম *" required></div>
+                            <div class="col-md-6"><input type="email" class="form-control" id="email" placeholder="আপনার ইমেইল *" required></div></div>
+                            <textarea class="form-control" id="message" rows="5" placeholder="আপনার বার্তা লিখুন ..." required></textarea>
+                            <div class="text-center"><button type="submit" class="btn-submit"><i class="fas fa-paper-plane me-2"></i>ইমেইল পাঠান</button></div>
+                            <div id="formStatus" class="text-center mt-3 small"></div>
+                        </form>
+                        <div class="alert alert-info mt-4 text-center"><i class="fas fa-info-circle"></i> ফর্ম সাবমিট করলেই আপনার মেইল ক্লায়েন্ট খুলবে এবং আমার ঠিকানা <strong>ja0743358@gmail.com</strong> স্বয়ংক্রিয়ভাবে যুক্ত থাকবে।</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; ২০২৬ মোঃ জুবায়ের আহমেদ | মদন, নেত্রকোনা, বাংলাদেশ</p>
+            <p><a href="mailto:ja0743358@gmail.com"><i class="fas fa-envelope"></i> ja0743358@gmail.com</a> &nbsp;|&nbsp;<a href="tel:+8801795700614"><i class="fas fa-phone-alt"></i> 01795700614</a></p>
+        </div>
     </footer>
 
-    <!-- Modal for Member Form -->
-    <div id="memberModal" class="modal">
-        <div class="modal-content">
-            <span style="float:right; cursor:pointer; font-size:28px;" id="closeModalBtn">&times;</span>
-            <h3>সদস্য হওয়ার আবেদন</h3>
-            <form id="memberForm">
-                <input type="text" placeholder="পূর্ণ নাম" id="memberName" required>
-                <input type="text" placeholder="ঠিকানা (বিস্তারিত)" id="memberAddress" required>
-                <input type="tel" placeholder="মোবাইল নম্বর" id="memberPhone" required>
-                <input type="email" placeholder="ইমেইল (ঐচ্ছিক)" id="memberEmail">
-                <textarea placeholder="আপনার আগ্রহের ক্ষেত্র / মন্তব্য" rows="2" id="memberInterest"></textarea>
-                <button type="submit" class="btn btn-red" style="width:100%;">ইমেইলে প্রেরণ করুন</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal for Upload Activity -->
-    <div id="uploadModal" class="modal">
-        <div class="modal-content">
-            <span style="float:right; cursor:pointer; font-size:28px;" id="closeUploadModal">&times;</span>
-            <h3>নতুন কার্যক্রম যুক্ত করুন</h3>
-            <form id="uploadForm">
-                <input type="text" id="activityTitle" placeholder="প্রকল্পের শিরোনাম" required>
-                <textarea id="activityDesc" placeholder="বিস্তারিত বিবরণ" rows="2" required></textarea>
-                <input type="text" id="activityImg" placeholder="ছবির URL (https://picsum.photos/id/...)" value="https://picsum.photos/id/33/300/150">
-                <button type="submit" class="btn admin-btn" style="width:100%;">কার্যক্রম সংরক্ষণ করুন</button>
-            </form>
-        </div>
-    </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script>
-        // ---------- নেভিগেশন মোবাইল ----------
-        const menuIcon = document.getElementById('menuIcon');
-        const navLinks = document.getElementById('navLinks');
-        menuIcon?.addEventListener('click', () => navLinks.classList.toggle('show'));
+        AOS.init({ duration: 800, once: true });
+        new Typed('#element', {
+            strings: ['প্রোগ্রামার', 'ওয়েব ডেভেলপার', 'পাইথন লাভার', 'ফ্রিল্যান্সার'],
+            typeSpeed: 70, backSpeed: 40, loop: true
+        });
 
-        // Hero Slider
-        let slideIndex = 0;
-        const sliderContainer = document.getElementById('sliderContainer');
-        const slides = document.querySelectorAll('.slide');
-        if(slides.length) {
-            setInterval(() => {
-                slideIndex = (slideIndex + 1) % slides.length;
-                sliderContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-            }, 4500);
+        // Profile picture lock system (one-time change only)
+        const uploadBtn = document.getElementById('uploadBtn');
+        const fileInput = document.getElementById('profileUpload');
+        const profileImg = document.getElementById('profileImage');
+        const lockStatusDiv = document.getElementById('lockStatus');
+        const hintText = document.getElementById('hintText');
+
+        // Check localStorage if already changed
+        const isLocked = localStorage.getItem('profileLocked') === 'true';
+        const savedImage = localStorage.getItem('profileImageSrc');
+
+        if (savedImage && isLocked) {
+            profileImg.src = savedImage;
+            lockStatusDiv.style.display = 'inline-block';
+            uploadBtn.disabled = true;
+            uploadBtn.style.opacity = '0.6';
+            uploadBtn.title = 'ছবি একবার পরিবর্তন করা হয়েছে, লক করা আছে';
+            hintText.innerText = '✅ ছবি লক করা আছে, আর পরিবর্তন করা যাবে না';
+        } else if (isLocked) {
+            // যদি কোনো কারণে লক ফ্ল্যাগ থাকে কিন্তু ছবি না থাকে, তবু লক রাখা ভালো
+            lockStatusDiv.style.display = 'inline-block';
+            uploadBtn.disabled = true;
+            hintText.innerText = '✅ ছবি লক করা আছে, আর পরিবর্তন করা যাবে না';
         }
 
-        // Dark mode
-        const darkToggle = document.getElementById('darkModeToggle');
-        darkToggle?.addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-            localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+        // Trigger file dialog when button clicked (if not locked)
+        uploadBtn.addEventListener('click', function() {
+            if (uploadBtn.disabled) return;
+            fileInput.click();
         });
-        if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
 
-        // Language Toggle (simplified)
-        let langState = 'bn';
-        const langBtn = document.getElementById('langToggle');
-        langBtn?.addEventListener('click', () => {
-            langState = langState === 'bn' ? 'en' : 'bn';
-            if(langState === 'en'){
-                document.querySelector('.about-text').innerText = "Al Aqsa Foundation, based in Modon, Netrokona, works for humanity & development across Bangladesh. Established in 2015, we empower the underprivileged through education, health, and livelihood programs.";
-                document.querySelector('#about h2').innerText = "About Us";
-                document.querySelector('#services h2').innerText = "Service Categories";
-                document.querySelector('#projects h2').innerHTML = '<i class="fas fa-chart-line"></i> Our Projects';
-                document.querySelector('#gallery h2').innerHTML = '<i class="fas fa-images"></i> Gallery';
-                document.querySelector('#contact h2').innerHTML = '<i class="fas fa-address-card"></i> Contact Us';
-                langBtn.innerHTML = '<i class="fas fa-language"></i> বাংলা';
-            } else {
-                location.reload();
+        fileInput.addEventListener('change', function(event) {
+            if (uploadBtn.disabled) return; // দ্বিতীয়বার বাধা
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgData = e.target.result;
+                    profileImg.src = imgData;
+                    // Lock after first upload
+                    localStorage.setItem('profileImageSrc', imgData);
+                    localStorage.setItem('profileLocked', 'true');
+                    // Disable button permanently
+                    uploadBtn.disabled = true;
+                    uploadBtn.style.opacity = '0.6';
+                    lockStatusDiv.style.display = 'inline-block';
+                    hintText.innerText = '🔒 ছবি লক করে দেওয়া হয়েছে (একবার পরিবর্তন করা সম্ভব)';
+                };
+                reader.readAsDataURL(file);
             }
-        });
-
-        // Visitor counter
-        let visits = localStorage.getItem('visitCount');
-        if(!visits) visits = 1;
-        else visits = parseInt(visits) + 1;
-        localStorage.setItem('visitCount', visits);
-        document.getElementById('visitorCount').innerText = visits;
-
-        // Search
-        document.getElementById('searchInput')?.addEventListener('input', function(e){
-            let filter = e.target.value.toLowerCase();
-            let allCards = document.querySelectorAll('.card:not(.project-item)'); // except projects? better include all cards
-            allCards.forEach(card => {
-                let text = card.innerText.toLowerCase();
-                if(text.includes(filter)) card.style.display = '';
-                else card.style.display = 'none';
-            });
-        });
-
-        // Counter animation
-        const counters = document.querySelectorAll('.counter');
-        const statsSection = document.querySelector('#stats');
-        let animated = false;
-        function startCounter(){
-            if(animated) return;
-            counters.forEach(c => {
-                const target = parseInt(c.getAttribute('data-target'));
-                let count = 0;
-                let increment = target / 80;
-                let update = setInterval(() => {
-                    count += increment;
-                    if(count >= target){
-                        c.innerText = target;
-                        clearInterval(update);
-                    } else {
-                        c.innerText = Math.floor(count);
-                    }
-                }, 20);
-            });
-            animated = true;
-        }
-        const observer = new IntersectionObserver((entries) => {
-            if(entries[0].isIntersecting) startCounter();
-        }, {threshold:0.4});
-        if(statsSection) observer.observe(statsSection);
-
-        // Member Modal
-        const modal = document.getElementById('memberModal');
-        const memberBtn = document.getElementById('memberBtn');
-        const closeBtn = document.getElementById('closeModalBtn');
-        memberBtn?.addEventListener('click', () => modal.style.display = 'flex');
-        closeBtn?.addEventListener('click', () => modal.style.display = 'none');
-        window.addEventListener('click', (e) => { if(e.target === modal) modal.style.display = 'none'; });
-
-        // Member form mailto
-        const memberForm = document.getElementById('memberForm');
-        memberForm?.addEventListener('submit', function(e){
-            e.preventDefault();
-            let name = document.getElementById('memberName').value;
-            let address = document.getElementById('memberAddress').value;
-            let phone = document.getElementById('memberPhone').value;
-            let email = document.getElementById('memberEmail').value;
-            let interest = document.getElementById('memberInterest').value;
-            let body = `নতুন সদস্য আবেদন:\nনাম: ${name}\nঠিকানা: ${address}\nমোবাইল: ${phone}\nইমেইল: ${email}\nআগ্রহ/মন্তব্য: ${interest}`;
-            window.location.href = `mailto:ja0743358@gmail.com?subject=সদস্য হোন আবেদন&body=${encodeURIComponent(body)}`;
-            alert('আপনার আবেদন প্রেরণ করা হয়েছে! শীঘ্রই যোগাযোগ করা হবে।');
-            modal.style.display = 'none';
-            memberForm.reset();
-        });
-
-        // Contact form mailto
-        const contactForm = document.getElementById('contactForm');
-        contactForm?.addEventListener('submit', function(e){
-            e.preventDefault();
-            let name = document.getElementById('contactName').value;
-            let email = document.getElementById('contactEmail').value;
-            let msg = document.getElementById('contactMsg').value;
-            let body = `যোগাযোগ ফর্ম থেকে:\nনাম: ${name}\nইমেইল: ${email}\nবার্তা: ${msg}`;
-            window.location.href = `mailto:ja0743358@gmail.com?subject=যোগাযোগ ফর্ম থেকে বার্তা&body=${encodeURIComponent(body)}`;
-            alert('আপনার বার্তা প্রেরণ হয়েছে। ধন্যবাদ!');
-            contactForm.reset();
-        });
-
-        // ---------- কার্যক্রম আপলোড ও স্থানীয় স্টোরেজ ----------
-        const projectsContainer = document.getElementById('projectsContainer');
-        const uploadBtn = document.getElementById('uploadActivityBtn');
-        const uploadModal = document.getElementById('uploadModal');
-        const closeUpload = document.getElementById('closeUploadModal');
-        const uploadForm = document.getElementById('uploadForm');
-
-        function loadProjectsFromStorage() {
-            const stored = localStorage.getItem('alAqsaProjects');
-            if(stored) {
-                const projects = JSON.parse(stored);
-                // remove all dynamically added (except default ones that have data-id="default*"? better to keep default IDs)
-                const defaultProjects = Array.from(projectsContainer.querySelectorAll('.project-item')).filter(card => card.getAttribute('data-id')?.startsWith('default'));
-                projectsContainer.innerHTML = '';
-                defaultProjects.forEach(dp => projectsContainer.appendChild(dp));
-                projects.forEach(proj => {
-                    if(!proj.id.startsWith('default')) {
-                        addProjectCardToDOM(proj.title, proj.desc, proj.img, proj.id);
-                    }
-                });
-            }
-        }
-
-        function addProjectCardToDOM(title, desc, imgUrl, id) {
-            const card = document.createElement('div');
-            card.className = 'card project-item';
-            card.setAttribute('data-id', id);
-            card.innerHTML = `
-                <img src="${imgUrl}" style="width:100%; border-radius:1rem;">
-                <h3>${escapeHtml(title)}</h3>
-                <p>${escapeHtml(desc)}</p>
-                <button class="btn delete-project" data-id="${id}" style="background:#b91c1c; padding:6px 12px; margin-top:8px;">মুছুন</button>
-            `;
-            projectsContainer.appendChild(card);
-            card.querySelector('.delete-project')?.addEventListener('click', (e) => {
-                e.stopPropagation();
-                deleteProject(id);
-            });
-        }
-
-        function escapeHtml(str) {
-            return str.replace(/[&<>]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
-            });
-        }
-
-        function saveProjectToStorage(title, desc, imgUrl) {
-            let projects = [];
-            const stored = localStorage.getItem('alAqsaProjects');
-            if(stored) projects = JSON.parse(stored);
-            const newId = 'proj_' + Date.now();
-            projects.push({ id: newId, title, desc, img: imgUrl });
-            localStorage.setItem('alAqsaProjects', JSON.stringify(projects));
-            addProjectCardToDOM(title, desc, imgUrl, newId);
-        }
-
-        function deleteProject(id) {
-            let projects = [];
-            const stored = localStorage.getItem('alAqsaProjects');
-            if(stored) projects = JSON.parse(stored);
-            const newProjects = projects.filter(p => p.id !== id);
-            localStorage.setItem('alAqsaProjects', JSON.stringify(newProjects));
-            const cardToRemove = document.querySelector(`.project-item[data-id="${id}"]`);
-            if(cardToRemove) cardToRemove.remove();
-        }
-
-        uploadBtn?.addEventListener('click', () => {
-            uploadModal.style.display = 'flex';
-        });
-        closeUpload?.addEventListener('click', () => uploadModal.style.display = 'none');
-        window.addEventListener('click', (e) => { if(e.target === uploadModal) uploadModal.style.display = 'none'; });
-
-        uploadForm?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const title = document.getElementById('activityTitle').value.trim();
-            const desc = document.getElementById('activityDesc').value.trim();
-            let img = document.getElementById('activityImg').value.trim();
-            if(!title || !desc) {
-                alert('শিরোনাম ও বিবরণ দিন');
-                return;
-            }
-            if(!img) img = 'https://picsum.photos/id/33/300/150';
-            saveProjectToStorage(title, desc, img);
-            uploadModal.style.display = 'none';
-            uploadForm.reset();
-            alert('নতুন কার্যক্রম সফলভাবে যুক্ত হয়েছে!');
-        });
-
-        loadProjectsFromStorage();
-
-        // ডিলিট বাটন আগে থেকেই ডিফল্ট কার্ডের জন্য না, ডিফল্ট কার্ড মুছতে পারবে না (শুধু ইউজার আপলোড)
-        document.querySelectorAll('.delete-project').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const id = btn.getAttribute('data-id');
-                if(id && !id.startsWith('default')) deleteProject(id);
-                else alert('ডিফল্ট প্রকল্প মুছতে পারবেন না।');
-            });
         });
     </script>
 </body>
