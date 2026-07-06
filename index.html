@@ -359,8 +359,10 @@
         .modal {
             display: none;
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0,0,0,0.55);
             backdrop-filter: blur(8px);
             z-index: 9999;
@@ -392,7 +394,8 @@
 
         .close-modal {
             position: absolute;
-            top: 20px; right: 28px;
+            top: 20px;
+            right: 28px;
             font-size: 2.2rem;
             cursor: pointer;
             color: #999;
@@ -546,11 +549,11 @@
                 <span></span>
             </div>
             <span class="nav-label">মেনু</span>
-            <div class="nav-dropdown" id="navDropdown">
-                <a href="#home" class="nav-link"><i class="fas fa-home"></i> হোম পেজ</a>
-                <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> আমাদের সম্পর্কে</a>
-                <a href="#activities" class="nav-link"><i class="fas fa-tasks"></i> কার্যক্রম</a>
-                <a href="#apply" class="nav-link"><i class="fas fa-user-plus"></i> সদস্য আবেদন</a>
+            <div class="nav-dropdown">
+                <a href="#home"><i class="fas fa-home"></i> হোম পেজ</a>
+                <a href="#about"><i class="fas fa-info-circle"></i> আমাদের সম্পর্কে</a>
+                <a href="#activities"><i class="fas fa-tasks"></i> কার্যক্রম</a>
+                <a href="#apply"><i class="fas fa-user-plus"></i> সদস্য আবেদন</a>
                 <div class="upload-option">
                     <a href="#" id="uploadMenuLink"><i class="fas fa-cloud-upload-alt" style="color:#f7c948;"></i> কার্যক্রম আপলোড</a>
                 </div>
@@ -559,7 +562,7 @@
     </div>
 </header>
 
-<div class="container" id="home">
+<div class="container">
 
     <section id="about">
         <h2 class="section-title"><i class="fas fa-bullhorn"></i> আমাদের সম্পর্কে</h2>
@@ -593,7 +596,7 @@
                 <input type="text" id="activityTitle" placeholder="যেমন: শীতবস্ত্র বিতরণ" required>
             </div>
             <div class="form-group">
-                <label><i class="fas fa-image"></i> ছবি আপলোড (গ্যালারি থেকে)</label>
+                <label><i class="fas fa-image"></i> ছবি আপলোড</label>
                 <input type="file" id="activityImage" accept="image/*" required>
             </div>
             <div class="form-group">
@@ -648,4 +651,291 @@
             </div>
             <div class="form-group">
                 <label><i class="fas fa-envelope"></i> আপনার ইমেইল</label>
-                <input type="email" id="applicantEmail" placeh
+                <input type="email" id="applicantEmail" placeholder="আপনার ইমেইল ঠিকানা" required>
+            </div>
+            <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> আবেদন জমা দিন</button>
+        </form>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer-links">
+    <div class="col">
+        <h3><i class="fas fa-info-circle"></i> সংগঠন</h3>
+        <a href="#about">আমাদের সম্পর্কে</a>
+        <a href="#activities">কার্যক্রম</a>
+        <a href="#apply">সদস্য হও</a>
+    </div>
+    <div class="col">
+        <h3><i class="fas fa-phone-alt"></i> যোগাযোগ</h3>
+        <a href="#">হটলাইন: ০১৭XX-XXXXXX</a>
+        <a href="#">ইমেইল: ja0743358@gmail.com</a>
+        <a href="#">ফেসবুক পেজ</a>
+    </div>
+    <div class="col">
+        <h3><i class="fas fa-share-alt"></i> সোশ্যাল</h3>
+        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+        <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+    </div>
+</div>
+
+<script>
+    // ===== DATA =====
+    let activities = JSON.parse(localStorage.getItem('alAqsaActivities')) || [];
+    const PASSWORD = "2008";
+    const ORG_EMAIL = "ja0743358@gmail.com";
+
+    // ===== DOM ELEMENTS =====
+    const grid = document.getElementById('activityGrid');
+
+    // Upload
+    const uploadModal = document.getElementById('uploadModal');
+    const uploadMenuLink = document.getElementById('uploadMenuLink');
+    const closeUploadBtn = document.getElementById('closeUploadModalBtn');
+    const uploadForm = document.getElementById('uploadForm');
+    const uploadPasswordError = document.getElementById('uploadPasswordError');
+
+    // Delete
+    const deleteModal = document.getElementById('deleteModal');
+    const closeDeleteBtn = document.getElementById('closeDeleteModalBtn');
+    const deletePasswordInput = document.getElementById('deletePasswordInput');
+    const deletePasswordError = document.getElementById('deletePasswordError');
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+    let deleteTargetId = null;
+
+    // Application
+    const appModal = document.getElementById('applicationModal');
+    const openAppBtn = document.getElementById('openModalBtn');
+    const closeAppBtn = document.getElementById('closeModalBtn');
+    const memberForm = document.getElementById('memberForm');
+
+    // Nav
+    const threeLineNav = document.getElementById('threeLineNav');
+
+    // ===== FUNCTIONS =====
+    function renderActivities() {
+        grid.innerHTML = '';
+        
+        if (activities.length === 0) {
+            const emptyDiv = document.createElement('div');
+            emptyDiv.className = 'empty-message';
+            emptyDiv.innerHTML = `
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>এখনো কোনো কার্যক্রম বা নোটিশ আপলোড করা হয়নি।</p>
+                <p style="font-size:0.9rem; margin-top:8px;">মেনু থেকে "কার্যক্রম আপলোড" অপশনে ক্লিক করুন।</p>
+            `;
+            grid.appendChild(emptyDiv);
+            return;
+        }
+
+        activities.forEach((activity, index) => {
+            const card = document.createElement('div');
+            card.className = 'activity-card';
+            card.style.animationDelay = `${index * 0.05}s`;
+
+            const isNotice = activity.title.toLowerCase().includes('নোটিশ') || activity.title.toLowerCase().includes('notice');
+
+            card.innerHTML = `
+                <img src="${activity.image}" alt="${activity.title}" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+                <div class="caption">
+                    <span class="text"><i class="fas ${isNotice ? 'fa-bullhorn' : 'fa-calendar-check'}"></i> ${activity.title}</span>
+                    <button class="delete-btn" data-id="${activity.id}"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                deleteTargetId = this.dataset.id;
+                deleteModal.classList.add('active');
+                deletePasswordInput.value = '';
+                deletePasswordError.style.display = 'none';
+            });
+        });
+    }
+
+    // ===== UPLOAD =====
+    uploadForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const title = document.getElementById('activityTitle').value.trim();
+        const fileInput = document.getElementById('activityImage');
+        const password = document.getElementById('uploadPassword').value.trim();
+
+        if (password !== PASSWORD) {
+            uploadPasswordError.style.display = 'block';
+            return;
+        } else {
+            uploadPasswordError.style.display = 'none';
+        }
+
+        if (!fileInput.files || !fileInput.files[0]) {
+            alert('দয়া করে একটি ছবি নির্বাচন করুন।');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const newActivity = {
+                id: Date.now().toString(),
+                title: title,
+                image: event.target.result,
+                createdAt: new Date().toISOString()
+            };
+
+            activities.push(newActivity);
+            localStorage.setItem('alAqsaActivities', JSON.stringify(activities));
+            renderActivities();
+            uploadModal.classList.remove('active');
+            uploadForm.reset();
+            alert('✅ কার্যক্রম সফলভাবে আপলোড হয়েছে!');
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+    });
+
+    // ===== DELETE =====
+    confirmDeleteBtn.addEventListener('click', function() {
+        const password = deletePasswordInput.value.trim();
+        
+        if (password !== PASSWORD) {
+            deletePasswordError.style.display = 'block';
+            return;
+        }
+        deletePasswordError.style.display = 'none';
+
+        if (deleteTargetId) {
+            activities = activities.filter(act => act.id !== deleteTargetId);
+            localStorage.setItem('alAqsaActivities', JSON.stringify(activities));
+            renderActivities();
+            deleteModal.classList.remove('active');
+            deleteTargetId = null;
+            alert('🗑️ কার্যক্রম ডিলিট করা হয়েছে।');
+        }
+    });
+
+    // ===== MODAL CONTROLS =====
+    // Upload
+    uploadMenuLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        uploadModal.classList.add('active');
+        threeLineNav.classList.remove('active');
+    });
+
+    closeUploadBtn.addEventListener('click', function() {
+        uploadModal.classList.remove('active');
+    });
+
+    // Delete
+    closeDeleteBtn.addEventListener('click', function() {
+        deleteModal.classList.remove('active');
+        deleteTargetId = null;
+    });
+
+    // Application
+    openAppBtn.addEventListener('click', function() {
+        appModal.classList.add('active');
+    });
+
+    closeAppBtn.addEventListener('click', function() {
+        appModal.classList.remove('active');
+        memberForm.reset();
+    });
+
+    // Close modals on outside click
+    window.addEventListener('click', function(e) {
+        if (e.target === uploadModal) uploadModal.classList.remove('active');
+        if (e.target === deleteModal) {
+            deleteModal.classList.remove('active');
+            deleteTargetId = null;
+        }
+        if (e.target === appModal) {
+            appModal.classList.remove('active');
+            memberForm.reset();
+        }
+    });
+
+    // ===== NAV TOGGLE =====
+    threeLineNav.addEventListener('click', function(e) {
+        if (e.target.closest('.nav-dropdown')) {
+            return;
+        }
+        this.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-dropdown a').forEach(link => {
+        link.addEventListener('click', function() {
+            threeLineNav.classList.remove('active');
+        });
+    });
+
+    // ===== MEMBER FORM =====
+    memberForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value.trim();
+        const address = document.getElementById('address').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const dob = document.getElementById('dob').value;
+        const birthReg = document.getElementById('birthReg').value.trim();
+        const applicantEmail = document.getElementById('applicantEmail').value.trim();
+
+        // Validation
+        if (!name || !address || !phone || !dob || !applicantEmail) {
+            alert('দয়া করে সব প্রয়োজনীয় তথ্য পূরণ করুন।');
+            return;
+        }
+
+        if (!/^01[3-9]\d{8}$/.test(phone)) {
+            alert('দয়া করে একটি বৈধ বাংলাদেশি ফোন নম্বর দিন (যেমন: 017XXXXXXXX)।');
+            return;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(applicantEmail)) {
+            alert('দয়া করে একটি বৈধ ইমেইল ঠিকানা দিন।');
+            return;
+        }
+
+        // Format date
+        const dateObj = new Date(dob);
+        const formattedDate = dateObj.toLocaleDateString('bn-BD', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+
+        // Create email
+        const subject = `সদস্য আবেদন - ${name}`;
+        const body = `আল আকসা ফাউন্ডেশন
+
+সদস্য আবেদন ফর্ম
+
+আবেদনকারীর তথ্য:
+------------------
+নাম: ${name}
+ঠিকানা: ${address}
+ফোন: ${phone}
+জন্ম তারিখ: ${formattedDate}
+জন্ম নিবন্ধন: ${birthReg || 'প্রদান করা হয়নি'}
+ইমেইল: ${applicantEmail}
+
+আবেদনের তারিখ: ${new Date().toLocaleString('bn-BD')}
+
+ধন্যবাদ!
+আল আকসা ফাউন্ডেশন`;
+
+        // Send email using mailto
+        const mailtoLink = `mailto:${ORG_EMAIL}?cc=${encodeURIComponent(applicantEmail)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoLink;
+        
+        appModal.classList.remove('active');
+        memberForm.reset();
+        alert('✅ আপনার আবেদন সফলভাবে প্রতিষ্ঠানের ইমেইলে পাঠানো হয়েছে!\nআমরা শীঘ্রই আপনার সাথে যোগাযোগ করবো।');
+    });
+
+    // ===== INIT =====
+    renderActivities();
+</script>
+
+</body>
+</html>
