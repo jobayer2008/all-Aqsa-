@@ -4,535 +4,648 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>আল আকসা ফাউন্ডেশন</title>
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Noto Sans Bengali', sans-serif;
         }
+
         body {
-            background: #f0f4f8;
-            color: #1e2a3a;
-            line-height: 1.6;
+            background: #f0f6fa;
+            color: #1e2a3e;
         }
-        /* Navigation */
-        .navbar {
-            background: #0b3d2e;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(145deg, #0a4b3a, #1a6b5a);
             color: white;
-            padding: 0.8rem 2rem;
+            padding: 25px 0 15px;
+            border-radius: 0 0 40px 40px;
+            box-shadow: 0 12px 30px rgba(0, 40, 30, 0.3);
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 215, 120, 0.08);
+            border-radius: 50%;
+        }
+
+        .header-flex {
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
         }
-        .navbar .logo-area {
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .logo {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #f7c948;
+            box-shadow: 0 0 0 3px rgba(247, 201, 72, 0.3), 0 8px 25px rgba(0,0,0,0.25);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: logoGlow 3s infinite alternate;
+            flex-shrink: 0;
+        }
+
+        @keyframes logoGlow {
+            0% { box-shadow: 0 0 0 3px rgba(247, 201, 72, 0.2), 0 8px 25px rgba(0,0,0,0.2); }
+            100% { box-shadow: 0 0 0 8px rgba(247, 201, 72, 0.1), 0 12px 35px rgba(247, 201, 72, 0.3); }
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .org-name h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+        }
+        .org-name p {
+            font-size: 1rem;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .three-line-nav {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            padding: 6px 12px;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: 0.3s;
+            z-index: 100;
+        }
+
+        .three-line-nav:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .three-line-nav .bar-icon {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 5px 8px;
+        }
+
+        .three-line-nav .bar-icon span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: white;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .three-line-nav .nav-label {
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding-right: 8px;
+            display: inline-block;
+        }
+
+        .nav-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            background: white;
+            border-radius: 24px;
+            padding: 16px 10px;
+            min-width: 240px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            flex-direction: column;
+            gap: 6px;
+            animation: dropIn 0.3s ease;
+            z-index: 999;
+        }
+
+        @keyframes dropIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .three-line-nav.active .nav-dropdown {
+            display: flex;
+        }
+
+        .nav-dropdown a {
+            color: #0a4b3a;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.95rem;
+        }
+
+        .nav-dropdown a:hover {
+            background: #f7c948;
+            color: #0a4b3a;
+            transform: translateX(5px);
+        }
+
+        .nav-dropdown a i {
+            width: 24px;
+            color: #0a4b3a;
+        }
+
+        .nav-dropdown .upload-option {
+            border-top: 2px solid #eef7fa;
+            margin-top: 8px;
+            padding-top: 10px;
+        }
+
+        .nav-dropdown .upload-option a:hover {
+            background: #1a6b5a;
+            color: white;
+        }
+
+        .nav-dropdown .upload-option a i {
+            color: #f7c948;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 50px 0 20px;
+            color: #0a4b3a;
+            border-left: 10px solid #f7c948;
+            padding-left: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title i {
+            color: #f7c948;
+            font-size: 2rem;
+        }
+
+        .description-box {
+            background: white;
+            padding: 35px 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(10, 75, 58, 0.08);
+            border: 1px solid #dceef5;
+            margin: 20px 0;
+        }
+
+        .description-box p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            color: #0a4b3a;
+            font-weight: 700;
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+            min-height: 200px;
+        }
+
+        .activity-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            transition: 0.35s ease;
+            border: 1px solid #e4f0f5;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 18px 40px rgba(10, 75, 58, 0.18);
+        }
+
+        .activity-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .activity-card .caption {
+            padding: 16px 18px;
+            font-weight: 600;
+            color: #0a4b3a;
+            background: #fafffe;
+            border-top: 1px solid #eef7fa;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .activity-card .caption .text {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .activity-card .caption i {
+            color: #f7c948;
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            padding: 5px 8px;
+            border-radius: 30px;
+        }
+
+        .delete-btn:hover {
+            background: #fee2e2;
+            color: #b91c1c;
+            transform: scale(1.1);
+        }
+
+        .empty-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 30px;
+            color: #6b8a7e;
+            font-size: 1.2rem;
+            border: 2px dashed #c2dce5;
+        }
+
+        .empty-message i {
+            font-size: 3rem;
+            color: #c2dce5;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .member-btn {
+            background: #f7c948;
+            color: #0a4b3a;
+            border: none;
+            padding: 18px 48px;
+            border-radius: 80px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(247, 201, 72, 0.5);
+            transition: 0.3s;
+            margin: 30px 0 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .member-btn:hover {
+            background: #e6b73a;
+            transform: scale(1.04);
+            box-shadow: 0 16px 40px rgba(247, 201, 72, 0.7);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px 45px;
+            border-radius: 50px;
+            max-width: 620px;
+            width: 92%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(60px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px; right: 28px;
+            font-size: 2.2rem;
+            cursor: pointer;
+            color: #999;
+            transition: 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #c0392b;
+            transform: rotate(90deg);
+        }
+
+        .modal-content h2 {
+            margin-bottom: 25px;
+            color: #0a4b3a;
+            border-bottom: 5px solid #f7c948;
+            padding-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 12px;
         }
-        .navbar .logo-area img {
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid #f5b041;
+
+        .form-group {
+            margin-bottom: 20px;
         }
-        .navbar .brand {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #f5b041;
-            letter-spacing: 1px;
-        }
-        .nav-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            list-style: none;
-            font-weight: 500;
-        }
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: 0.3s;
-            padding: 6px 0;
-            border-bottom: 2px solid transparent;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            border-bottom-color: #f5b041;
-            color: #f5b041;
-        }
-        .menu-toggle {
-            display: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: white;
-        }
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #0b3d2e 0%, #1a6b4a 100%);
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 0.5rem;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0.5rem auto;
-            opacity: 0.9;
-        }
-        .hero .btn-member {
-            background: #f5b041;
-            color: #0b3d2e;
-            padding: 14px 40px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 1.5rem;
-            transition: 0.3s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-        .hero .btn-member:hover {
-            background: #e6a032;
-            transform: scale(1.05);
-        }
-        /* Main container */
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
-        /* About / Description */
-        .about {
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-            margin-bottom: 2rem;
-        }
-        .about h2 {
-            color: #0b3d2e;
-            border-left: 6px solid #f5b041;
-            padding-left: 1rem;
-            margin-bottom: 1rem;
-        }
-        .about p {
-            font-size: 1.05rem;
-            margin-bottom: 0.8rem;
-        }
-        .about .mission {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        .about .mission div {
-            flex: 1 1 200px;
-            background: #f8fafc;
-            padding: 1rem;
-            border-radius: 12px;
-            border-left: 4px solid #f5b041;
-        }
-        .about img {
-            max-width: 100%;
-            border-radius: 12px;
-            margin: 1rem 0;
-        }
-        /* Gallery */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        .gallery img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: 0.3s;
-        }
-        .gallery img:hover {
-            transform: scale(1.03);
-        }
-        /* Notice Section */
-        .notice-section {
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-            margin: 2rem 0;
-        }
-        .notice-section h2 {
-            color: #0b3d2e;
-            border-left: 6px solid #f5b041;
-            padding-left: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .notice-area {
-            background: #f9f9f9;
-            padding: 1.5rem;
-            border-radius: 12px;
-            min-height: 100px;
-            border: 1px dashed #ccc;
-        }
-        .notice-area .notice-item {
-            background: white;
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border-left: 4px solid #f5b041;
-        }
-        .notice-area .notice-item img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-top: 8px;
-        }
-        .notice-area .notice-item small {
-            color: #888;
-        }
-        /* Upload form */
-        .upload-form {
-            margin-top: 1.5rem;
-            padding: 1.5rem;
-            background: #f0f7f4;
-            border-radius: 12px;
-        }
-        .upload-form input, .upload-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 6px 0 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-        .upload-form button {
-            background: #0b3d2e;
-            color: white;
-            border: none;
-            padding: 10px 30px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .upload-form button:hover {
-            background: #1a6b4a;
-        }
-        /* Member Form Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            overflow-y: auto;
-            padding: 1rem;
-        }
-        .modal-content {
-            background: white;
-            max-width: 600px;
-            width: 100%;
-            padding: 2rem;
-            border-radius: 20px;
-            position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-        }
-        .modal-content h2 {
-            color: #0b3d2e;
-            border-bottom: 2px solid #f5b041;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.2rem;
-        }
-        .modal-content .close {
-            position: absolute;
-            right: 20px;
-            top: 15px;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #888;
-        }
-        .modal-content .close:hover { color: #000; }
-        .modal-content label {
-            font-weight: 600;
+
+        .form-group label {
             display: block;
-            margin: 10px 0 4px;
-        }
-        .modal-content input, .modal-content select, .modal-content textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            font-weight: 600;
+            color: #1a3d35;
             margin-bottom: 6px;
+            font-size: 0.95rem;
         }
-        .modal-content .btn-submit {
-            background: #f5b041;
-            color: #0b3d2e;
-            border: none;
-            padding: 12px 30px;
-            font-weight: 700;
-            border-radius: 30px;
-            cursor: pointer;
-            margin-top: 1rem;
+
+        .form-group input {
             width: 100%;
-            font-size: 1.1rem;
+            padding: 14px 20px;
+            border: 2px solid #dceef5;
+            border-radius: 40px;
+            font-size: 1rem;
+            transition: 0.3s;
+            background: #fafffe;
         }
-        .modal-content .btn-submit:hover {
-            background: #e6a032;
+
+        .form-group input:focus {
+            border-color: #0a4b3a;
+            outline: none;
+            box-shadow: 0 0 0 5px rgba(10, 75, 58, 0.12);
         }
-        /* Footer */
-        footer {
-            background: #0b3d2e;
+
+        .submit-btn {
+            background: #0a4b3a;
             color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
+            border: none;
+            padding: 16px 30px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 8px 25px rgba(10, 75, 58, 0.3);
         }
-        footer a {
-            color: #f5b041;
-            text-decoration: none;
+
+        .submit-btn:hover {
+            background: #f7c948;
+            color: #0a4b3a;
         }
-        /* Responsive */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: row;
-                padding: 0.8rem 1rem;
-            }
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                background: #0b3d2e;
-                padding: 1rem 0;
-                gap: 0.8rem;
-                margin-top: 0.5rem;
-            }
-            .nav-links.active {
-                display: flex;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .hero h1 { font-size: 2rem; }
-        }
-        .success-msg {
-            background: #d4edda;
-            color: #155724;
-            padding: 10px;
-            border-radius: 8px;
-            margin: 10px 0;
+
+        .password-error {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 5px;
             display: none;
         }
-        .email-send-area {
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            background: #eaf4f0;
-            border-radius: 12px;
-        }
-        .email-send-area input, .email-send-area textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 6px 0 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-        .email-send-area button {
-            background: #0b3d2e;
+
+        .footer-links {
+            background: #0a4b3a;
             color: white;
-            border: none;
-            padding: 10px 30px;
-            border-radius: 30px;
-            font-weight: 600;
+            padding: 40px 30px;
+            border-radius: 50px 50px 0 0;
+            margin-top: 70px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 30px;
+            text-align: center;
+        }
+
+        .footer-links .col {
+            flex: 1 1 140px;
+        }
+
+        .footer-links h3 {
+            font-size: 1.3rem;
+            margin-bottom: 18px;
+            color: #f7c948;
+            font-weight: 700;
+        }
+
+        .footer-links a {
+            display: block;
+            color: #d4ece6;
+            text-decoration: none;
+            margin: 8px 0;
+            transition: 0.3s;
+            font-weight: 500;
             cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            color: #f7c948;
+            padding-left: 10px;
+        }
+
+        @media (max-width: 700px) {
+            .header-flex {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .three-line-nav {
+                align-self: flex-end;
+            }
+            .modal-content {
+                padding: 25px;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="logo-area">
-            <img src="https://files.catbox.moe/5y45sj.png" alt="Logo">
-            <span class="brand">আল আকসা ফাউন্ডেশন</span>
-        </div>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </div>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#" class="active" onclick="showPage('home')">হোম</a></li>
-            <li><a href="#" onclick="showPage('about')">আমাদের সম্পর্কে</a></li>
-            <li><a href="#" onclick="showPage('gallery')">গ্যালারি</a></li>
-            <li><a href="#" onclick="showPage('notice')">নোটিশ</a></li>
-            <li><a href="#" onclick="showPage('contact')">যোগাযোগ</a></li>
-        </ul>
-    </nav>
 
-    <!-- Hero Section (visible on home) -->
-    <section id="homePage" class="hero">
-        <h1>আল আকসা ফাউন্ডেশন</h1>
-        <p>সমাজ সেবায় নিবেদিত, নির্যাতিত ও গরিবদের পাশে, শিক্ষার্থীদের সহায়তায়</p>
-        <p><i class="fas fa-hand-holding-heart" style="color:#f5b041;"></i> কোন রাজনৈতিক প্রতিষ্ঠান নয় — শুধু মানবতার সেবা</p>
-        <button class="btn-member" onclick="openMemberForm()"><i class="fas fa-user-plus"></i> সদস্য হোন</button>
+<header>
+    <div class="container header-flex">
+        <div class="logo-area">
+            <div class="logo">
+                <img src="https://files.catbox.moe/5y45sj.png" alt="আল আকসা ফাউন্ডেশন লোগো">
+            </div>
+            <div class="org-name">
+                <h1>আল আকসা ফাউন্ডেশন</h1>
+                <p><i class="fas fa-hand-holding-heart" style="color:#f7c948;"></i> মানবতার সেবায়, বিশ্বাসের আলোয়</p>
+            </div>
+        </div>
+        <div class="three-line-nav" id="threeLineNav">
+            <div class="bar-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <span class="nav-label">মেনু</span>
+            <div class="nav-dropdown" id="navDropdown">
+                <a href="#home" class="nav-link"><i class="fas fa-home"></i> হোম পেজ</a>
+                <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> আমাদের সম্পর্কে</a>
+                <a href="#activities" class="nav-link"><i class="fas fa-tasks"></i> কার্যক্রম</a>
+                <a href="#apply" class="nav-link"><i class="fas fa-user-plus"></i> সদস্য আবেদন</a>
+                <div class="upload-option">
+                    <a href="#" id="uploadMenuLink"><i class="fas fa-cloud-upload-alt" style="color:#f7c948;"></i> কার্যক্রম আপলোড</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container" id="home">
+
+    <section id="about">
+        <h2 class="section-title"><i class="fas fa-bullhorn"></i> আমাদের সম্পর্কে</h2>
+        <div class="description-box">
+            <p><span class="highlight">আল আকসা ফাউন্ডেশন</span> একটি অলাভজনক, সহায়তামূলক ও মানবিক প্রতিষ্ঠান। আমরা দুর্যোগ ব্যবস্থাপনা, শিক্ষা বৃত্তি, স্বাস্থ্য সচেতনতা, এতিম খাওয়ানো ও সমাজকল্যাণে কাজ করি। </p>
+            <p style="margin-top:18px;">২০১০ সাল থেকে আমরা অসহায়, দুস্থ ও পিছিয়ে পড়া মানুষের পাশে দাঁড়িয়ে আসছি। আমাদের লক্ষ্য একটি শোষণমুক্ত, স্নেহময় ও সমৃদ্ধ সমাজ গঠন। প্রতিটি সদস্য আমাদের পরিবারের অংশ, আর আমরা একসঙ্গে কাজ করি মানবতার কল্যাণে।</p>
+            <p style="margin-top:18px; font-style:italic; color:#0a4b3a;"><i class="fas fa-quote-left" style="color:#f7c948;"></i>  "সেবাই আমাদের ধর্ম, মানবতাই আমাদের পথ"  <i class="fas fa-quote-right" style="color:#f7c948;"></i></p>
+        </div>
     </section>
 
-    <!-- Main Container -->
-    <div class="container" id="mainContainer">
+    <section id="activities">
+        <h2 class="section-title"><i class="fas fa-tasks"></i> আমাদের কার্যক্রম ও নোটিশ</h2>
+        <p style="margin-bottom:10px; font-size:1.1rem; color:#1e4a3e;">আপলোড করা কার্যক্রম ও নোটিশ এখানে দেখাবে</p>
+        <div class="activity-grid" id="activityGrid"></div>
+    </section>
 
-        <!-- About Page (hidden by default) -->
-        <div id="aboutPage" style="display:none;">
-            <div class="about">
-                <h2>আমাদের সম্পর্কে</h2>
-                <p><strong>আল আকসা ফাউন্ডেশন</strong> একটি অরাজনৈতিক, সমাজসেবামূলক সংস্থা। আমাদের লক্ষ্য হলো গরিব, নির্যাতিত ও শিক্ষার্থীদের পাশে দাঁড়ানো।</p>
-                <div class="mission">
-                    <div><i class="fas fa-hands-helping" style="color:#f5b041; font-size:2rem;"></i><h4>গরিবদের সাহায্য</h4><p>খাদ্য, বস্ত্র, চিকিৎসা সহায়তা</p></div>
-                    <div><i class="fas fa-graduation-cap" style="color:#f5b041; font-size:2rem;"></i><h4>শিক্ষার্থীদের জন্য</h4><p>বৃত্তি, শিক্ষা উপকরণ, ক্যারিয়ার গাইড</p></div>
-                    <div><i class="fas fa-shield-alt" style="color:#f5b041; font-size:2rem;"></i><h4>নির্যাতিতদের পাশে</h4><p>আইনি সহায়তা, মানসিক সমর্থন</p></div>
-                </div>
-                <img src="https://files.catbox.moe/5y45sj.png" alt="Foundation Logo" style="max-width:200px; display:block; margin:1rem auto;">
-                <p>আমরা বিশ্বাস করি — মানবতা সর্বশ্রেষ্ঠ ধর্ম। আমাদের সকল কার্যক্রম স্বচ্ছ ও জনকল্যাণমুখী।</p>
-            </div>
-        </div>
-
-        <!-- Gallery Page -->
-        <div id="galleryPage" style="display:none;">
-            <h2 style="color:#0b3d2e; border-left:6px solid #f5b041; padding-left:1rem;">আমাদের কার্যক্রমের ছবি</h2>
-            <div class="gallery">
-                <img src="https://images.pexels.com/photos/6646952/pexels-photo-6646952.jpeg" alt="Help">
-                <img src="https://images.pexels.com/photos/6646953/pexels-photo-6646953.jpeg" alt="Education">
-                <img src="https://images.pexels.com/photos/6646958/pexels-photo-6646958.jpeg" alt="Community">
-                <img src="https://images.pexels.com/photos/6646955/pexels-photo-6646955.jpeg" alt="Support">
-                <img src="https://images.pexels.com/photos/6646951/pexels-photo-6646951.jpeg" alt="Relief">
-                <img src="https://images.pexels.com/photos/6646957/pexels-photo-6646957.jpeg" alt="Charity">
-            </div>
-            <p style="margin-top:1rem; text-align:center; color:#555;">আমাদের সাহায্য কার্যক্রমের কিছু মুহূর্ত</p>
-        </div>
-
-        <!-- Notice Page -->
-        <div id="noticePage" style="display:none;">
-            <div class="notice-section">
-                <h2>নোটিশ ও কার্যক্রম</h2>
-                <div class="notice-area" id="noticeDisplay">
-                    <!-- dynamically loaded -->
-                    <div class="notice-item">সকলকে জানানো যাচ্ছে যে আগামী ১৫ই জুলাই একটি বিনামূল্যে মেডিকেল ক্যাম্প অনুষ্ঠিত হবে।</div>
-                    <div class="notice-item">শিক্ষার্থীদের জন্য স্কলারশিপের আবেদন চলছে। শেষ তারিখ ৩০শে জুলাই।</div>
-                </div>
-
-                <!-- Upload Form (password protected) -->
-                <div class="upload-form">
-                    <h3><i class="fas fa-upload"></i> নোটিশ / কার্যক্রম আপলোড</h3>
-                    <input type="password" id="uploadPassword" placeholder="পাসওয়ার্ড দিন" style="max-width:300px;">
-                    <input type="text" id="noticeTitle" placeholder="শিরোনাম (ঐচ্ছিক)">
-                    <textarea id="noticeText" rows="3" placeholder="লিখিত বার্তা"></textarea>
-                    <input type="text" id="noticeImageUrl" placeholder="ছবির URL (যদি থাকে)">
-                    <button onclick="uploadNotice()"><i class="fas fa-cloud-upload-alt"></i> আপলোড</button>
-                    <p style="font-size:0.9rem; color:#888; margin-top:6px;">পাসওয়ার্ড: 2008</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Contact Page -->
-        <div id="contactPage" style="display:none;">
-            <div class="about">
-                <h2>যোগাযোগ</h2>
-                <p><i class="fas fa-envelope"></i> ইমেইল: <strong>ja0743358@gmail.com</strong></p>
-                <p><i class="fas fa-phone"></i> ফোন: +৮৮০ ১৯০০-০০০০০০</p>
-                <p><i class="fas fa-map-marker-alt"></i> ঠিকানা: ঢাকা, বাংলাদেশ</p>
-                <div class="email-send-area">
-                    <h3>সরাসরি ইমেইল পাঠান</h3>
-                    <input type="text" id="emailSenderName" placeholder="আপনার নাম">
-                    <input type="email" id="emailSenderEmail" placeholder="আপনার ইমেইল">
-                    <textarea id="emailMessage" rows="4" placeholder="আপনার বার্তা"></textarea>
-                    <button onclick="sendEmail()"><i class="fas fa-paper-plane"></i> ইমেইল পাঠান</button>
-                    <div id="emailStatus" class="success-msg"></div>
-                </div>
-            </div>
-        </div>
-
+    <div style="text-align:center; margin: 30px 0 20px;" id="apply">
+        <button class="member-btn" id="openModalBtn"><i class="fas fa-pen-fancy"></i> সদস্য আবেদন করুন</button>
     </div>
 
-    <!-- Member Form Modal -->
-    <div id="memberModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeMemberForm()">&times;</span>
-            <h2><i class="fas fa-user-edit"></i> সদস্য আবেদন ফর্ম</h2>
-            <form id="memberForm" onsubmit="submitMemberForm(event)">
-                <label>নাম *</label>
-                <input type="text" id="memName" required>
-                <label>ঠিকানা *</label>
-                <input type="text" id="memAddress" required>
-                <label>ফোন নাম্বার *</label>
-                <input type="text" id="memPhone" required>
-                <label>ইমেইল</label>
-                <input type="email" id="memEmail">
-                <label>জন্মতারিখ</label>
-                <input type="date" id="memDob">
-                <label>জন্ম নিবন্ধন নাম্বার</label>
-                <input type="text" id="memBirthReg">
-                <label>শিক্ষাগত যোগ্যতা</label>
-                <input type="text" id="memEducation" placeholder="যেমন: এইচএসসি, স্নাতক">
-                <label>ব্লাড গ্রুপ</label>
-                <select id="memBlood">
-                    <option value="">-- নির্বাচন করুন --</option>
-                    <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
-                    <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
-                </select>
-                <label>জেলা</label>
-                <input type="text" id="memDistrict" placeholder="জেলা">
-                <label>থানা</label>
-                <input type="text" id="memThana" placeholder="থানা">
-                <label>বিভাগ</label>
-                <input type="text" id="memDivision" placeholder="বিভাগ">
-                <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> আবেদন পাঠান</button>
-                <div id="formStatus" class="success-msg"></div>
-            </form>
-        </div>
+</div>
+
+<!-- Upload Modal -->
+<div class="modal" id="uploadModal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeUploadModalBtn">&times;</span>
+        <h2><i class="fas fa-cloud-upload-alt" style="color:#f7c948;"></i> কার্যক্রম আপলোড করুন</h2>
+        <form id="uploadForm">
+            <div class="form-group">
+                <label><i class="fas fa-tag"></i> কার্যক্রমের নাম</label>
+                <input type="text" id="activityTitle" placeholder="যেমন: শীতবস্ত্র বিতরণ" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-image"></i> ছবি আপলোড (গ্যালারি থেকে)</label>
+                <input type="file" id="activityImage" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-lock"></i> পাসওয়ার্ড</label>
+                <input type="password" id="uploadPassword" placeholder="আপলোড পাসওয়ার্ড" required>
+                <div class="password-error" id="uploadPasswordError">ভুল পাসওয়ার্ড!</div>
+            </div>
+            <button type="submit" class="submit-btn"><i class="fas fa-upload"></i> আপলোড করুন</button>
+        </form>
     </div>
+</div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; ২০২৬ আল আকসা ফাউন্ডেশন | সমাজ সেবায় নিবেদিত</p>
-        <p><a href="mailto:ja0743358@gmail.com">ja0743358@gmail.com</a></p>
-    </footer>
+<!-- Delete Modal -->
+<div class="modal" id="deleteModal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeDeleteModalBtn">&times;</span>
+        <h2><i class="fas fa-trash-alt" style="color:#e74c3c;"></i> ডিলিট পাসওয়ার্ড দিন</h2>
+        <p style="margin-bottom:20px;">এই কার্যক্রম ডিলিট করতে পাসওয়ার্ড দিন:</p>
+        <div class="form-group">
+            <input type="password" id="deletePasswordInput" placeholder="পাসওয়ার্ড দিন">
+            <div class="password-error" id="deletePasswordError">ভুল পাসওয়ার্ড!</div>
+        </div>
+        <button id="confirmDeleteBtn" class="submit-btn" style="background:#e74c3c;"><i class="fas fa-check"></i> নিশ্চিত করুন</button>
+    </div>
+</div>
 
-    <script>
-        // ---------- Navigation ----------
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
-
-        function showPage(page) {
-            // hide all sections
-            document.getElementById('homePage').style.display = 'none';
-            document.getElementById('aboutPage').style.display = 'none';
-            document.getElementById('galleryPage').style.display = 'none';
-            document.getElementById('noticePage').style.display = 'none';
-            document.getElementById('contactPage').style.display = 'none';
-            // show selected
-            if(page === 'home') document.getElementById('homePage').style.display = 'block';
-            else if(page === 'about') document.getElementById('aboutPage').style.display = 'block';
-            else if(page === 'gallery') document.getElementById('galleryPage').style.display = 'block';
-            else if(page === 'notice') document.getElementById('noticePage').style.display = 'block';
-            else if(page === 'contact') document.getElementById('contactPage').style.display = 'block';
-            // close mobile menu
-            document.getElementById('navLinks').classList.remove('active');
-            // highlight nav
-            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-            // find and add active class (simple)
-            let links = document.querySelectorAll('.nav-links a');
-         
+<!-- Application Modal -->
+<div class="modal" id="applicationModal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeModalBtn">&times;</span>
+        <h2><i class="fas fa-user-check" style="color:#f7c948;"></i> সদস্য আবেদন ফর্ম</h2>
+        <form id="memberForm">
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> নাম</label>
+                <input type="text" id="name" placeholder="আপনার সম্পূর্ণ নাম" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-map-pin"></i> ঠিকানা</label>
+                <input type="text" id="address" placeholder="বর্তমান ঠিকানা" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-phone-alt"></i> ফোন নম্বর</label>
+                <input type="tel" id="phone" placeholder="০১XXX-XXXXXX" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-calendar-alt"></i> জন্ম তারিখ</label>
+                <input type="date" id="dob" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-id-card"></i> জন্ম নিবন্ধন নম্বর</label>
+                <input type="text" id="birthReg" placeholder="জন্ম নিবন্ধন নম্বর">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-envelope"></i> আপনার ইমেইল</label>
+                <input type="email" id="applicantEmail" placeh
