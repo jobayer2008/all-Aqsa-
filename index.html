@@ -384,27 +384,29 @@
             margin: 0;
         }
 
-        /* ===== GALLERY ===== */
+        /* ===== GALLERY (ছবি বড় করা হয়েছে) ===== */
         .gallery-grid .gallery-item {
             border-radius: var(--radius);
             overflow: hidden;
             position: relative;
             cursor: pointer;
             aspect-ratio: 1 / 1;
+            background: #f5f5f5;
         }
         .gallery-grid .gallery-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             transition: var(--transition);
+            padding: 6px;
         }
         .gallery-grid .gallery-item:hover img {
-            transform: scale(1.08);
+            transform: scale(1.05);
         }
         .gallery-grid .gallery-item .overlay {
             position: absolute;
             inset: 0;
-            background: rgba(26, 107, 60, 0.6);
+            background: rgba(26, 107, 60, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -412,10 +414,51 @@
             transition: var(--transition);
             color: #fff;
             font-weight: 600;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(3px);
+            border-radius: var(--radius);
         }
         .gallery-grid .gallery-item:hover .overlay {
             opacity: 1;
+        }
+
+        /* ===== ACTIVITIES CARD (হোম পেজে ছবি সহ) ===== */
+        .activity-preview-card {
+            background: #fff;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: var(--transition);
+            margin-bottom: 1rem;
+        }
+        .activity-preview-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(26, 107, 60, 0.12);
+        }
+        .activity-preview-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .activity-preview-card .card-body {
+            padding: 1rem 1.25rem;
+        }
+        .activity-preview-card .card-body h6 {
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 2px;
+        }
+        .activity-preview-card .card-body p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        .activity-preview-card .card-body .badge-date {
+            background: rgba(26, 107, 60, 0.10);
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            border-radius: 20px;
         }
 
         /* ===== MEMBERSHIP FORM ===== */
@@ -567,19 +610,6 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
             margin-bottom: 1.5rem;
         }
-        .admin-card .card-header-custom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.2rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 2px solid #f0f5f0;
-        }
-        .admin-card .card-header-custom h5 {
-            font-weight: 700;
-            color: var(--primary-dark);
-            margin: 0;
-        }
 
         /* ===== LOGIN ===== */
         .login-wrapper {
@@ -597,11 +627,6 @@
             box-shadow: 0 20px 60px rgba(26, 107, 60, 0.15);
             max-width: 420px;
             width: 100%;
-        }
-        .login-box h3 {
-            font-weight: 700;
-            color: var(--primary-dark);
-            text-align: center;
         }
         .login-box .logo-text {
             text-align: center;
@@ -684,6 +709,9 @@
             .admin-content {
                 padding: 1rem;
             }
+            .activity-preview-card img {
+                height: 140px;
+            }
         }
 
         /* ===== TOAST ===== */
@@ -739,7 +767,6 @@
             }
         }
 
-        /* Admin panel page sections */
         .admin-page {
             display: none;
         }
@@ -764,10 +791,9 @@
     <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="#" onclick="navigateTo('home')">
-                <i class="fas fa-mosque" style="font-size:1.6rem;"></i>
-                আল আকসা <span>ফাউন্ডেশন</span>
+                <i class="fas fa-mosque"></i> আল আকসা <span>ফাউন্ডেশন</span>
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navMenu">
@@ -792,52 +818,28 @@
     <!-- ===== MAIN CONTENT ===== -->
     <main>
 
-        <!-- ============================================================ -->
         <!-- HOME PAGE -->
-        <!-- ============================================================ -->
         <section class="page-section active" id="page-home">
-            <!-- HERO -->
+            <!-- Hero -->
             <div class="hero">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-6 hero-content">
-                            <div class="hero-badge">
-                                <i class="fas fa-hand-holding-heart me-1"></i> স্বাগতম
-                            </div>
-                            <h1>
-                                মানবতার সেবায়,<br />
-                                <span>কল্যাণের প্রত্যয়ে</span>
-                            </h1>
-                            <p>
-                                আল আকসা ফাউন্ডেশন একটি অলাভজনক মানবিক সংস্থা যা সমাজের অসহায়,
-                                দুস্থ ও পিছিয়ে পড়া মানুষের পাশে দাঁড়াতে কাজ করে।
-                            </p>
+                            <div class="hero-badge"><i class="fas fa-hand-holding-heart me-1"></i> স্বাগতম</div>
+                            <h1>মানবতার সেবায়,<br /><span>কল্যাণের প্রত্যয়ে</span></h1>
+                            <p>আল আকসা ফাউন্ডেশন একটি অলাভজনক মানবিক সংস্থা যা সমাজের অসহায়, দুস্থ ও পিছিয়ে পড়া মানুষের পাশে দাঁড়াতে কাজ করে।</p>
                             <div class="d-flex flex-wrap gap-3">
-                                <a href="#" class="btn btn-primary-custom" onclick="navigateTo('membership')">
-                                    <i class="fas fa-user-plus me-1"></i> সদস্য হোন
-                                </a>
-                                <a href="#" class="btn btn-outline-custom" onclick="navigateTo('about')">
-                                    আরও জানুন
-                                </a>
+                                <a href="#" class="btn btn-primary-custom" onclick="navigateTo('membership')"><i class="fas fa-user-plus me-1"></i> সদস্য হোন</a>
+                                <a href="#" class="btn btn-outline-custom" onclick="navigateTo('about')">আরও জানুন</a>
                             </div>
                             <div class="hero-stats">
-                                <div class="stat">
-                                    <h3 id="statMembers">০</h3>
-                                    <p>সদস্য</p>
-                                </div>
-                                <div class="stat">
-                                    <h3 id="statActivities">০</h3>
-                                    <p>কার্যক্রম</p>
-                                </div>
-                                <div class="stat">
-                                    <h3 id="statNotices">০</h3>
-                                    <p>নোটিশ</p>
-                                </div>
+                                <div class="stat"><h3 id="statMembers">০</h3><p>সদস্য</p></div>
+                                <div class="stat"><h3 id="statActivities">০</h3><p>কার্যক্রম</p></div>
+                                <div class="stat"><h3 id="statNotices">০</h3><p>নোটিশ</p></div>
                             </div>
                         </div>
                         <div class="col-lg-6 hero-image text-center">
-                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center"
-                            alt="আল আকসা ফাউন্ডেশন" class="img-fluid rounded-4 shadow-lg" />
+                            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop&crop=center" alt="আল আকসা ফাউন্ডেশন" class="img-fluid rounded-4 shadow-lg" />
                         </div>
                     </div>
                 </div>
@@ -851,37 +853,21 @@
                             <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 mb-3">আমাদের সম্পর্কে</span>
                             <h2 class="section-title">আল আকসা ফাউন্ডেশন</h2>
                             <p style="font-size:1.05rem;color:var(--text-muted);line-height:1.9;">
-                                আল আকসা ফাউন্ডেশন ২০২০ সালে প্রতিষ্ঠিত একটি স্বেচ্ছাসেবী মানবিক সংস্থা।
-                                আমাদের লক্ষ্য是社会の অসহায়, দুস্থ ও পিছিয়ে পড়া জনগোষ্ঠীর জীবনমান উন্নয়নে
-                                কাজ করা। আমরা শিক্ষা, স্বাস্থ্য, খাদ্য সহায়তা ও সচেতনতা কার্যক্রমের মাধ্যমে
-                                সমাজের কল্যাণে নিবেদিত।
+                                আল আকসা ফাউন্ডেশন ২০২০ সালে প্রতিষ্ঠিত একটি স্বেচ্ছাসেবী মানবিক সংস্থা। আমাদের লক্ষ্য是社会の অসহায়, দুস্থ ও পিছিয়ে পড়া জনগোষ্ঠীর জীবনমান উন্নয়নে কাজ করা। আমরা শিক্ষা, স্বাস্থ্য, খাদ্য সহায়তা ও সচেতনতা কার্যক্রমের মাধ্যমে সমাজের কল্যাণে নিবেদিত।
                             </p>
                             <div class="row mt-4">
                                 <div class="col-sm-6">
-                                    <div class="d-flex align-items-center gap-2 mb-2">
-                                        <i class="fas fa-check-circle text-success"></i>
-                                        <span>শিক্ষা কার্যক্রম</span>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-2 mb-2">
-                                        <i class="fas fa-check-circle text-success"></i>
-                                        <span>স্বাস্থ্য সেবা</span>
-                                    </div>
+                                    <div class="d-flex align-items-center gap-2 mb-2"><i class="fas fa-check-circle text-success"></i><span>শিক্ষা কার্যক্রম</span></div>
+                                    <div class="d-flex align-items-center gap-2 mb-2"><i class="fas fa-check-circle text-success"></i><span>স্বাস্থ্য সেবা</span></div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="d-flex align-items-center gap-2 mb-2">
-                                        <i class="fas fa-check-circle text-success"></i>
-                                        <span>খাদ্য সহায়তা</span>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-2 mb-2">
-                                        <i class="fas fa-check-circle text-success"></i>
-                                        <span>দুর্যোগ ব্যবস্থাপনা</span>
-                                    </div>
+                                    <div class="d-flex align-items-center gap-2 mb-2"><i class="fas fa-check-circle text-success"></i><span>খাদ্য সহায়তা</span></div>
+                                    <div class="d-flex align-items-center gap-2 mb-2"><i class="fas fa-check-circle text-success"></i><span>দুর্যোগ ব্যবস্থাপনা</span></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <img src="https://images.unsplash.com/photo-1593113630400-ea4288922497?w=600&h=400&fit=crop&crop=center"
-                            alt="আমাদের সম্পর্কে" class="img-fluid rounded-4 shadow" />
+                            <img src="https://images.unsplash.com/photo-1593113630400-ea4288922497?w=600&h=400&fit=crop&crop=center" alt="আমাদের সম্পর্কে" class="img-fluid rounded-4 shadow" />
                         </div>
                     </div>
                 </div>
@@ -920,7 +906,7 @@
                 </div>
             </section>
 
-            <!-- সর্বশেষ কার্যক্রম ও নোটিশ -->
+            <!-- সর্বশেষ কার্যক্রম (ছবি সহ) ও নোটিশ -->
             <section class="section-padding" style="background:#f8fbf8;">
                 <div class="container">
                     <div class="row g-5">
@@ -929,24 +915,20 @@
                                 <h3 class="section-title" style="font-size:1.6rem;">সর্বশেষ কার্যক্রম</h3>
                                 <a href="#" onclick="navigateTo('activities')" class="text-success fw-semibold">সব দেখুন →</a>
                             </div>
-                            <div id="homeActivities" class="page-loader">
-                                <div class="loader"></div>
-                            </div>
+                            <div id="homeActivities" class="page-loader"><div class="loader"></div></div>
                         </div>
                         <div class="col-lg-6">
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <h3 class="section-title" style="font-size:1.6rem;">সাম্প্রতিক নোটিশ</h3>
                                 <a href="#" onclick="navigateTo('notice')" class="text-success fw-semibold">সব দেখুন →</a>
                             </div>
-                            <div id="homeNotices" class="page-loader">
-                                <div class="loader"></div>
-                            </div>
+                            <div id="homeNotices" class="page-loader"><div class="loader"></div></div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Gallery Preview -->
+            <!-- Gallery Preview (ছবি বড়) -->
             <section class="section-padding">
                 <div class="container">
                     <div class="text-center mb-5">
@@ -962,33 +944,29 @@
                 </div>
             </section>
 
-            <!-- সদস্য হওয়ার বাটন + যোগাযোগ -->
+            <!-- সদস্য হওয়ার বাটন + যোগাযোগ (আপডেটেড তথ্য) -->
             <section class="section-padding" style="background:var(--primary-gradient);color:#fff;">
                 <div class="container text-center">
                     <h2 class="fw-bold" style="font-size:2.4rem;">আমাদের সাথে যুক্ত হোন</h2>
-                    <p style="font-size:1.15rem;opacity:0.9;max-width:600px;margin:0.5rem auto 2rem;">
-                        আল আকসা ফাউন্ডেশনের সদস্য হয়ে মানবতার সেবায় অংশ নিন।
-                    </p>
-                    <a href="#" class="btn btn-light btn-lg px-5 rounded-pill fw-bold text-success" onclick="navigateTo('membership')">
-                        <i class="fas fa-user-plus me-2"></i> সদস্য হোন
-                    </a>
+                    <p style="font-size:1.15rem;opacity:0.9;max-width:600px;margin:0.5rem auto 2rem;">আল আকসা ফাউন্ডেশনের সদস্য হয়ে মানবতার সেবায় অংশ নিন।</p>
+                    <a href="#" class="btn btn-light btn-lg px-5 rounded-pill fw-bold text-success" onclick="navigateTo('membership')"><i class="fas fa-user-plus me-2"></i> সদস্য হোন</a>
                     <div class="row mt-5 g-4 justify-content-center">
                         <div class="col-sm-4">
                             <div class="d-flex align-items-center justify-content-center gap-2">
                                 <i class="fas fa-phone fs-4"></i>
-                                <span>+৮৮০ ১৭০০-০০০০০০</span>
+                                <span>০১*********</span>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="d-flex align-items-center justify-content-center gap-2">
                                 <i class="fas fa-envelope fs-4"></i>
-                                <span>info@alaqsafoundation.org</span>
+                                <span>allaqsafoundation@gmail.com</span>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="d-flex align-items-center justify-content-center gap-2">
                                 <i class="fas fa-map-marker-alt fs-4"></i>
-                                <span>ঢাকা, বাংলাদেশ</span>
+                                <span>মদন, নেত্রকোনা</span>
                             </div>
                         </div>
                     </div>
@@ -996,9 +974,7 @@
             </section>
         </section>
 
-        <!-- ============================================================ -->
         <!-- ABOUT PAGE -->
-        <!-- ============================================================ -->
         <section class="page-section section-padding" id="page-about" style="padding-top:120px;">
             <div class="container">
                 <div class="text-center mb-5">
@@ -1007,71 +983,36 @@
                 </div>
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
-                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&h=400&fit=crop&crop=center"
-                        alt="About" class="img-fluid rounded-4 shadow" />
+                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&h=400&fit=crop&crop=center" alt="About" class="img-fluid rounded-4 shadow" />
                     </div>
                     <div class="col-lg-6">
                         <h4 class="fw-bold text-primary-dark">আমাদের যাত্রা</h4>
-                        <p style="color:var(--text-muted);line-height:1.9;">
-                            আল আকসা ফাউন্ডেশন ২০২০ সালে কয়েকজন তরুণ স্বেচ্ছাসেবীর হাত ধরে যাত্রা শুরু করে।
-                            আমরা বিশ্বাস করি—প্রত্যেকটি মানুষই পরিবর্তনের অংশীদার। আমাদের লক্ষ্য是社会ের
-                            প্রান্তিক জনগোষ্ঠীর জীবনমান উন্নয়নে টেকসই কার্যক্রম পরিচালনা করা।
-                        </p>
+                        <p style="color:var(--text-muted);line-height:1.9;">আল আকসা ফাউন্ডেশন ২০২০ সালে কয়েকজন তরুণ স্বেচ্ছাসেবীর হাত ধরে যাত্রা শুরু করে। আমরা বিশ্বাস করি—প্রত্যেকটি মানুষই পরিবর্তনের অংশীদার। আমাদের লক্ষ্য是社会ের প্রান্তিক জনগোষ্ঠীর জীবনমান উন্নয়নে টেকসই কার্যক্রম পরিচালনা করা।</p>
                         <h4 class="fw-bold text-primary-dark mt-4">আমাদের দর্শন</h4>
-                        <p style="color:var(--text-muted);line-height:1.9;">
-                            আমরা মানবতার সেবাকে আমাদের জীবনের মূল লক্ষ্য হিসেবে দেখি। আমাদের দর্শন হলো—
-                            <strong>সবার জন্য সমান সুযোগ</strong>, <strong>শিক্ষার আলো</strong> এবং
-                            <strong>স্বাস্থ্য সুরক্ষা</strong> নিশ্চিত করা।
-                        </p>
+                        <p style="color:var(--text-muted);line-height:1.9;">আমরা মানবতার সেবাকে আমাদের জীবনের মূল লক্ষ্য হিসেবে দেখি। আমাদের দর্শন হলো— <strong>সবার জন্য সমান সুযোগ</strong>, <strong>শিক্ষার আলো</strong> এবং <strong>স্বাস্থ্য সুরক্ষা</strong> নিশ্চিত করা।</p>
                         <div class="row mt-4 g-3">
-                            <div class="col-6">
-                                <div class="d-flex align-items-center gap-2">
-                                    <i class="fas fa-check-circle text-success"></i>
-                                    <span>স্বচ্ছতা</span>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="d-flex align-items-center gap-2">
-                                    <i class="fas fa-check-circle text-success"></i>
-                                    <span>জবাবদিহিতা</span>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="d-flex align-items-center gap-2">
-                                    <i class="fas fa-check-circle text-success"></i>
-                                    <span>মানবিকতা</span>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="d-flex align-items-center gap-2">
-                                    <i class="fas fa-check-circle text-success"></i>
-                                    <span>টেকসই উন্নয়ন</span>
-                                </div>
-                            </div>
+                            <div class="col-6"><div class="d-flex align-items-center gap-2"><i class="fas fa-check-circle text-success"></i><span>স্বচ্ছতা</span></div></div>
+                            <div class="col-6"><div class="d-flex align-items-center gap-2"><i class="fas fa-check-circle text-success"></i><span>জবাবদিহিতা</span></div></div>
+                            <div class="col-6"><div class="d-flex align-items-center gap-2"><i class="fas fa-check-circle text-success"></i><span>মানবিকতা</span></div></div>
+                            <div class="col-6"><div class="d-flex align-items-center gap-2"><i class="fas fa-check-circle text-success"></i><span>টেকসই উন্নয়ন</span></div></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ============================================================ -->
         <!-- ACTIVITIES PAGE -->
-        <!-- ============================================================ -->
         <section class="page-section section-padding" id="page-activities" style="padding-top:120px;">
             <div class="container">
                 <div class="text-center mb-5">
                     <h2 class="section-title text-center">আমাদের কার্যক্রম</h2>
                     <p class="section-subtitle">আমরা যে সকল মানবিক কার্যক্রম পরিচালনা করি</p>
                 </div>
-                <div class="row g-4" id="activitiesList">
-                    <div class="page-loader"><div class="loader"></div></div>
-                </div>
+                <div class="row g-4" id="activitiesList"><div class="page-loader"><div class="loader"></div></div></div>
             </div>
         </section>
 
-        <!-- ============================================================ -->
         <!-- NOTICE PAGE -->
-        <!-- ============================================================ -->
         <section class="page-section section-padding" id="page-notice" style="padding-top:120px;">
             <div class="container">
                 <div class="text-center mb-5">
@@ -1080,32 +1021,24 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
-                        <div id="noticesList">
-                            <div class="page-loader"><div class="loader"></div></div>
-                        </div>
+                        <div id="noticesList"><div class="page-loader"><div class="loader"></div></div></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ============================================================ -->
-        <!-- GALLERY PAGE -->
-        <!-- ============================================================ -->
+        <!-- GALLERY PAGE (ছবি বড়) -->
         <section class="page-section section-padding" id="page-gallery" style="padding-top:120px;">
             <div class="container">
                 <div class="text-center mb-5">
                     <h2 class="section-title text-center">গ্যালারি</h2>
                     <p class="section-subtitle">আমাদের কার্যক্রমের কিছু মুহূর্ত</p>
                 </div>
-                <div class="row g-3 gallery-grid" id="galleryList">
-                    <div class="page-loader"><div class="loader"></div></div>
-                </div>
+                <div class="row g-3 gallery-grid" id="galleryList"><div class="page-loader"><div class="loader"></div></div></div>
             </div>
         </section>
 
-        <!-- ============================================================ -->
-        <!-- MEMBERSHIP PAGE (ছবি ফিল্ড সরানো হয়েছে) -->
-        <!-- ============================================================ -->
+        <!-- MEMBERSHIP PAGE -->
         <section class="page-section section-padding" id="page-membership" style="padding-top:120px;">
             <div class="container">
                 <div class="text-center mb-5">
@@ -1137,7 +1070,6 @@
                                         <label for="memberAddress" class="form-label">ঠিকানা <span class="text-danger">*</span></label>
                                         <textarea class="form-control" id="memberAddress" rows="2" required placeholder="আপনার সম্পূর্ণ ঠিকানা"></textarea>
                                     </div>
-                                    <!-- ছবি আপলোড ফিল্ড সম্পূর্ণ সরানো হয়েছে -->
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-primary-custom w-100" id="membershipSubmitBtn">
                                             <i class="fas fa-paper-plane me-2"></i> সদস্য হিসেবে নিবন্ধন করুন
@@ -1151,9 +1083,7 @@
             </div>
         </section>
 
-        <!-- ============================================================ -->
-        <!-- CONTACT PAGE -->
-        <!-- ============================================================ -->
+        <!-- CONTACT PAGE (আপডেটেড তথ্য) -->
         <section class="page-section section-padding" id="page-contact" style="padding-top:120px;">
             <div class="container">
                 <div class="text-center mb-5">
@@ -1167,21 +1097,21 @@
                                 <div class="contact-info-box">
                                     <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
                                     <h6>ঠিকানা</h6>
-                                    <p>ঢাকা, বাংলাদেশ</p>
+                                    <p>মদন, নেত্রকোনা</p>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="contact-info-box">
                                     <div class="icon"><i class="fas fa-phone"></i></div>
                                     <h6>ফোন</h6>
-                                    <p>+৮৮০ ১৭০০-০০০০০০</p>
+                                    <p>০১*********</p>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="contact-info-box">
                                     <div class="icon"><i class="fas fa-envelope"></i></div>
                                     <h6>ইমেইল</h6>
-                                    <p>info@alaqsafoundation.org</p>
+                                    <p>allaqsafoundation@gmail.com</p>
                                 </div>
                             </div>
                         </div>
@@ -1215,11 +1145,8 @@
             </div>
         </section>
 
-        <!-- ============================================================ -->
         <!-- ADMIN PANEL -->
-        <!-- ============================================================ -->
         <section class="page-section" id="page-admin" style="padding-top:0;background:#fafffa;min-height:100vh;">
-
             <!-- Admin Login -->
             <div id="adminLoginWrapper" class="login-wrapper">
                 <div class="login-box">
@@ -1228,20 +1155,16 @@
                     <form id="adminLoginForm">
                         <div class="mb-3">
                             <label for="adminEmail" class="form-label">ইমেইল</label>
-                            <!-- ডিফল্ট ইমেইল প্রি-ফিল্ড -->
                             <input type="email" class="form-control" id="adminEmail" required value="admin@demo.com" />
                         </div>
                         <div class="mb-3">
                             <label for="adminPassword" class="form-label">পাসওয়ার্ড</label>
-                            <!-- ডিফল্ট পাসওয়ার্ড প্রি-ফিল্ড -->
                             <input type="password" class="form-control" id="adminPassword" required value="123456" />
                         </div>
                         <button type="submit" class="btn btn-primary-custom w-100" id="adminLoginBtn">
                             <i class="fas fa-sign-in-alt me-2"></i> লগইন
                         </button>
-                        <div class="mt-3 text-center">
-                            <small class="text-muted">ডেমো: admin@demo.com / 123456</small>
-                        </div>
+                        <div class="mt-3 text-center"><small class="text-muted">ডেমো: admin@demo.com / 123456</small></div>
                     </form>
                 </div>
             </div>
@@ -1250,153 +1173,61 @@
             <div id="adminDashboard" style="display:none;">
                 <div class="container-fluid px-0">
                     <div class="row g-0">
-                        <!-- Sidebar -->
                         <div class="col-lg-3 col-xl-2 admin-sidebar">
-                            <div class="brand">
-                                <i class="fas fa-mosque me-2"></i> আল আকসা <span>প্যানেল</span>
-                            </div>
+                            <div class="brand"><i class="fas fa-mosque me-2"></i> আল আকসা <span>প্যানেল</span></div>
                             <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="#" data-admin-page="dashboard">
-                                        <i class="fas fa-chart-pie"></i> ড্যাশবোর্ড
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" data-admin-page="notices">
-                                        <i class="fas fa-bullhorn"></i> নোটিশ
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" data-admin-page="activities">
-                                        <i class="fas fa-calendar-check"></i> কার্যক্রম
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" data-admin-page="gallery">
-                                        <i class="fas fa-images"></i> গ্যালারি
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" data-admin-page="members">
-                                        <i class="fas fa-users"></i> সদস্য
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" data-admin-page="contacts">
-                                        <i class="fas fa-envelope"></i> বার্তা
-                                    </a>
-                                </li>
-                                <li class="nav-item mt-3">
-                                    <a class="nav-link text-danger" href="#" id="adminLogoutBtn">
-                                        <i class="fas fa-sign-out-alt"></i> লগআউট
-                                    </a>
-                                </li>
+                                <li class="nav-item"><a class="nav-link active" href="#" data-admin-page="dashboard"><i class="fas fa-chart-pie"></i> ড্যাশবোর্ড</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#" data-admin-page="notices"><i class="fas fa-bullhorn"></i> নোটিশ</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#" data-admin-page="activities"><i class="fas fa-calendar-check"></i> কার্যক্রম</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#" data-admin-page="gallery"><i class="fas fa-images"></i> গ্যালারি</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#" data-admin-page="members"><i class="fas fa-users"></i> সদস্য</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#" data-admin-page="contacts"><i class="fas fa-envelope"></i> বার্তা</a></li>
+                                <li class="nav-item mt-3"><a class="nav-link text-danger" href="#" id="adminLogoutBtn"><i class="fas fa-sign-out-alt"></i> লগআউট</a></li>
                             </ul>
                         </div>
-
-                        <!-- Content -->
                         <div class="col-lg-9 col-xl-10 admin-content">
-
-                            <!-- Dashboard -->
                             <div class="admin-page active" id="admin-dashboard">
                                 <h4 class="fw-bold text-primary-dark mb-4"><i class="fas fa-chart-pie me-2"></i> ড্যাশবোর্ড</h4>
                                 <div class="row g-4">
-                                    <div class="col-md-3">
-                                        <div class="admin-card text-center">
-                                            <h2 class="text-primary" id="adminStatMembers">০</h2>
-                                            <p class="text-muted">মোট সদস্য</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="admin-card text-center">
-                                            <h2 class="text-primary" id="adminStatActivities">০</h2>
-                                            <p class="text-muted">মোট কার্যক্রম</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="admin-card text-center">
-                                            <h2 class="text-primary" id="adminStatNotices">০</h2>
-                                            <p class="text-muted">মোট নোটিশ</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="admin-card text-center">
-                                            <h2 class="text-primary" id="adminStatContacts">০</h2>
-                                            <p class="text-muted">মোট বার্তা</p>
-                                        </div>
-                                    </div>
+                                    <div class="col-md-3"><div class="admin-card text-center"><h2 class="text-primary" id="adminStatMembers">০</h2><p class="text-muted">মোট সদস্য</p></div></div>
+                                    <div class="col-md-3"><div class="admin-card text-center"><h2 class="text-primary" id="adminStatActivities">০</h2><p class="text-muted">মোট কার্যক্রম</p></div></div>
+                                    <div class="col-md-3"><div class="admin-card text-center"><h2 class="text-primary" id="adminStatNotices">০</h2><p class="text-muted">মোট নোটিশ</p></div></div>
+                                    <div class="col-md-3"><div class="admin-card text-center"><h2 class="text-primary" id="adminStatContacts">০</h2><p class="text-muted">মোট বার্তা</p></div></div>
                                 </div>
                             </div>
-
-                            <!-- Notices Management -->
                             <div class="admin-page" id="admin-notices">
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <h4 class="fw-bold text-primary-dark"><i class="fas fa-bullhorn me-2"></i> নোটিশ ব্যবস্থাপনা</h4>
-                                    <button class="btn btn-primary-custom btn-sm" data-bs-toggle="modal" data-bs-target="#noticeModal">
-                                        <i class="fas fa-plus me-1"></i> নতুন নোটিশ
-                                    </button>
+                                    <button class="btn btn-primary-custom btn-sm" data-bs-toggle="modal" data-bs-target="#noticeModal"><i class="fas fa-plus me-1"></i> নতুন নোটিশ</button>
                                 </div>
-                                <div class="admin-card">
-                                    <div id="adminNoticesList">
-                                        <div class="page-loader"><div class="loader"></div></div>
-                                    </div>
-                                </div>
+                                <div class="admin-card"><div id="adminNoticesList"><div class="page-loader"><div class="loader"></div></div></div></div>
                             </div>
-
-                            <!-- Activities Management -->
                             <div class="admin-page" id="admin-activities">
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <h4 class="fw-bold text-primary-dark"><i class="fas fa-calendar-check me-2"></i> কার্যক্রম ব্যবস্থাপনা</h4>
-                                    <button class="btn btn-primary-custom btn-sm" data-bs-toggle="modal" data-bs-target="#activityModal">
-                                        <i class="fas fa-plus me-1"></i> নতুন কার্যক্রম
-                                    </button>
+                                    <button class="btn btn-primary-custom btn-sm" data-bs-toggle="modal" data-bs-target="#activityModal"><i class="fas fa-plus me-1"></i> নতুন কার্যক্রম</button>
                                 </div>
-                                <div class="admin-card">
-                                    <div id="adminActivitiesList">
-                                        <div class="page-loader"><div class="loader"></div></div>
-                                    </div>
-                                </div>
+                                <div class="admin-card"><div id="adminActivitiesList"><div class="page-loader"><div class="loader"></div></div></div></div>
                             </div>
-
-                            <!-- Gallery Management -->
                             <div class="admin-page" id="admin-gallery">
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <h4 class="fw-bold text-primary-dark"><i class="fas fa-images me-2"></i> গ্যালারি ব্যবস্থাপনা</h4>
-                                    <button class="btn btn-primary-custom btn-sm" data-bs-toggle="modal" data-bs-target="#galleryModal">
-                                        <i class="fas fa-plus me-1"></i> নতুন ছবি
-                                    </button>
+                                    <button class="btn btn-primary-custom btn-sm" data-bs-toggle="modal" data-bs-target="#galleryModal"><i class="fas fa-plus me-1"></i> নতুন ছবি</button>
                                 </div>
-                                <div class="admin-card">
-                                    <div id="adminGalleryList">
-                                        <div class="page-loader"><div class="loader"></div></div>
-                                    </div>
-                                </div>
+                                <div class="admin-card"><div id="adminGalleryList"><div class="page-loader"><div class="loader"></div></div></div></div>
                             </div>
-
-                            <!-- Members Management -->
                             <div class="admin-page" id="admin-members">
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <h4 class="fw-bold text-primary-dark"><i class="fas fa-users me-2"></i> সদস্য ব্যবস্থাপনা</h4>
                                 </div>
-                                <div class="admin-card">
-                                    <div id="adminMembersList">
-                                        <div class="page-loader"><div class="loader"></div></div>
-                                    </div>
-                                </div>
+                                <div class="admin-card"><div id="adminMembersList"><div class="page-loader"><div class="loader"></div></div></div></div>
                             </div>
-
-                            <!-- Contacts Management -->
                             <div class="admin-page" id="admin-contacts">
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <h4 class="fw-bold text-primary-dark"><i class="fas fa-envelope me-2"></i> বার্তা ব্যবস্থাপনা</h4>
                                 </div>
-                                <div class="admin-card">
-                                    <div id="adminContactsList">
-                                        <div class="page-loader"><div class="loader"></div></div>
-                                    </div>
-                                </div>
+                                <div class="admin-card"><div id="adminContactsList"><div class="page-loader"><div class="loader"></div></div></div></div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -1405,7 +1236,7 @@
 
     </main>
 
-    <!-- ===== FOOTER ===== -->
+    <!-- ===== FOOTER (আপডেটেড তথ্য) ===== -->
     <footer class="footer">
         <div class="container">
             <div class="row g-4">
@@ -1439,19 +1270,16 @@
                 </div>
                 <div class="col-lg-4">
                     <h5>যোগাযোগ</h5>
-                    <p><i class="fas fa-map-marker-alt me-2"></i> ঢাকা, বাংলাদেশ</p>
-                    <p><i class="fas fa-phone me-2"></i> +৮৮০ ১৭০০-০০০০০০</p>
-                    <p><i class="fas fa-envelope me-2"></i> info@alaqsafoundation.org</p>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> মদন, নেত্রকোনা</p>
+                    <p><i class="fas fa-phone me-2"></i> ০১*********</p>
+                    <p><i class="fas fa-envelope me-2"></i> allaqsafoundation@gmail.com</p>
                 </div>
             </div>
-            <div class="copyright text-center">
-                &copy; ২০২৬ আল আকসা ফাউন্ডেশন। সর্বস্বত্ব সংরক্ষিত।
-            </div>
+            <div class="copyright text-center">&copy; ২০২৬ আল আকসা ফাউন্ডেশন। সর্বস্বত্ব সংরক্ষিত।</div>
         </div>
     </footer>
 
     <!-- ===== MODALS ===== -->
-
     <!-- Notice Modal -->
     <div class="modal fade" id="noticeModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -1463,18 +1291,9 @@
                 <div class="modal-body">
                     <form id="noticeForm">
                         <input type="hidden" id="noticeEditId" />
-                        <div class="mb-3">
-                            <label for="noticeTitle" class="form-label">শিরোনাম <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="noticeTitle" required />
-                        </div>
-                        <div class="mb-3">
-                            <label for="noticeContent" class="form-label">বিবরণ <span class="text-danger">*</span></label>
-                            <textarea class="form-control" id="noticeContent" rows="4" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="noticeDate" class="form-label">তারিখ <span class="text-danger">*</span></label>
-                            <input type="date" class="form-control" id="noticeDate" required />
-                        </div>
+                        <div class="mb-3"><label for="noticeTitle" class="form-label">শিরোনাম <span class="text-danger">*</span></label><input type="text" class="form-control" id="noticeTitle" required /></div>
+                        <div class="mb-3"><label for="noticeContent" class="form-label">বিবরণ <span class="text-danger">*</span></label><textarea class="form-control" id="noticeContent" rows="4" required></textarea></div>
+                        <div class="mb-3"><label for="noticeDate" class="form-label">তারিখ <span class="text-danger">*</span></label><input type="date" class="form-control" id="noticeDate" required /></div>
                         <button type="submit" class="btn btn-primary-custom w-100" id="noticeSubmitBtn">সংরক্ষণ করুন</button>
                     </form>
                 </div>
@@ -1493,23 +1312,10 @@
                 <div class="modal-body">
                     <form id="activityForm">
                         <input type="hidden" id="activityEditId" />
-                        <div class="mb-3">
-                            <label for="activityTitle" class="form-label">শিরোনাম <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="activityTitle" required />
-                        </div>
-                        <div class="mb-3">
-                            <label for="activityDescription" class="form-label">বিবরণ <span class="text-danger">*</span></label>
-                            <textarea class="form-control" id="activityDescription" rows="3" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="activityDate" class="form-label">তারিখ <span class="text-danger">*</span></label>
-                            <input type="date" class="form-control" id="activityDate" required />
-                        </div>
-                        <div class="mb-3">
-                            <label for="activityImage" class="form-label">ছবি (ঐচ্ছিক)</label>
-                            <input type="file" class="form-control" id="activityImage" accept="image/*" />
-                            <div id="activityImagePreview" class="mt-2"></div>
-                        </div>
+                        <div class="mb-3"><label for="activityTitle" class="form-label">শিরোনাম <span class="text-danger">*</span></label><input type="text" class="form-control" id="activityTitle" required /></div>
+                        <div class="mb-3"><label for="activityDescription" class="form-label">বিবরণ <span class="text-danger">*</span></label><textarea class="form-control" id="activityDescription" rows="3" required></textarea></div>
+                        <div class="mb-3"><label for="activityDate" class="form-label">তারিখ <span class="text-danger">*</span></label><input type="date" class="form-control" id="activityDate" required /></div>
+                        <div class="mb-3"><label for="activityImage" class="form-label">ছবি (ঐচ্ছিক)</label><input type="file" class="form-control" id="activityImage" accept="image/*" /><div id="activityImagePreview" class="mt-2"></div></div>
                         <button type="submit" class="btn btn-primary-custom w-100" id="activitySubmitBtn">সংরক্ষণ করুন</button>
                     </form>
                 </div>
@@ -1527,15 +1333,8 @@
                 </div>
                 <div class="modal-body">
                     <form id="galleryForm">
-                        <div class="mb-3">
-                            <label for="galleryTitle" class="form-label">শিরোনাম (ঐচ্ছিক)</label>
-                            <input type="text" class="form-control" id="galleryTitle" placeholder="ছবির শিরোনাম" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="galleryImage" class="form-label">ছবি <span class="text-danger">*</span></label>
-                            <input type="file" class="form-control" id="galleryImage" accept="image/*" required />
-                            <div id="galleryImagePreview" class="mt-2"></div>
-                        </div>
+                        <div class="mb-3"><label for="galleryTitle" class="form-label">শিরোনাম (ঐচ্ছিক)</label><input type="text" class="form-control" id="galleryTitle" placeholder="ছবির শিরোনাম" /></div>
+                        <div class="mb-3"><label for="galleryImage" class="form-label">ছবি <span class="text-danger">*</span></label><input type="file" class="form-control" id="galleryImage" accept="image/*" required /><div id="galleryImagePreview" class="mt-2"></div></div>
                         <button type="submit" class="btn btn-primary-custom w-100" id="gallerySubmitBtn">আপলোড করুন</button>
                     </form>
                 </div>
@@ -1543,7 +1342,7 @@
         </div>
     </div>
 
-    <!-- Delete Confirmation Modal -->
+    <!-- Delete Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content">
@@ -1560,13 +1359,12 @@
         </div>
     </div>
 
-
     <!-- ============================================================ -->
     <!-- ===== JAVASCRIPT ===== -->
     <!-- ============================================================ -->
     <script>
         // ================================================================
-        //  SUPABASE CONFIG (আপনার দেওয়া ক্রেডেনশিয়াল)
+        //  SUPABASE CONFIG
         // ================================================================
         const SUPABASE_URL = 'https://jbolihppzeoppyrdjfit.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_HiAnbamt7afRfbYG7EDkYQ_KhCaOWqg';
@@ -1582,9 +1380,6 @@
         let deleteType = null;
         let isAdmin = false;
 
-        // ================================================================
-        //  DOM REFS
-        // ================================================================
         const $ = (id) => document.getElementById(id);
         const $$ = (sel) => document.querySelectorAll(sel);
 
@@ -1609,50 +1404,31 @@
         //  NAVIGATION
         // ================================================================
         function navigateTo(page) {
-            // Hide all pages
             $$('.page-section').forEach(el => el.classList.remove('active'));
-
             const target = $(`page-${page}`);
-            if (target) {
-                target.classList.add('active');
-                currentPage = page;
-            }
+            if (target) { target.classList.add('active'); currentPage = page; }
 
-            // Update nav links
             $$('#navMenu .nav-link').forEach(el => el.classList.remove('active'));
             const navLinks = $$('#navMenu .nav-link');
             const pageMap = { home: 0, about: 1, activities: 2, notice: 3, gallery: 4, membership: 5, contact: 6, admin: 7 };
             const idx = pageMap[page];
-            if (idx !== undefined && navLinks[idx]) {
-                navLinks[idx].classList.add('active');
-            }
+            if (idx !== undefined && navLinks[idx]) navLinks[idx].classList.add('active');
 
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // If navigating to admin, handle login state
-            if (page === 'admin') {
-                handleAdminView();
-            }
-
-            // Load data for certain pages
+            if (page === 'admin') handleAdminView();
             if (page === 'home') loadHomeData();
             if (page === 'activities') loadActivities();
             if (page === 'notice') loadNotices();
             if (page === 'gallery') loadGallery();
 
-            // Close mobile menu
             const navCollapse = document.querySelector('.navbar-collapse');
-            if (navCollapse.classList.contains('show')) {
-                navCollapse.classList.remove('show');
-            }
+            if (navCollapse.classList.contains('show')) navCollapse.classList.remove('show');
         }
 
         // ================================================================
-        //  HOME DATA
+        //  HOME DATA (ছবি সহ কার্যক্রম)
         // ================================================================
         async function loadHomeData() {
-            // Stats
             try {
                 const [membersRes, activitiesRes, noticesRes] = await Promise.all([
                     supabase.from('members').select('*', { count: 'exact', head: true }),
@@ -1664,48 +1440,37 @@
                 $('statNotices').textContent = noticesRes.count || 0;
             } catch (e) { console.error(e); }
 
-            // Home Activities
+            // হোম পেজের কার্যক্রম (ছবি সহ)
             try {
-                const { data } = await supabase
-                    .from('activities')
-                    .select('*')
-                    .order('created_at', { ascending: false })
-                    .limit(3);
+                const { data } = await supabase.from('activities').select('*').order('created_at', { ascending: false }).limit(3);
                 const container = $('homeActivities');
                 if (data && data.length) {
                     container.innerHTML = data.map(a => `
-                        <div class="notice-item">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div>
+                        <div class="activity-preview-card">
+                            ${a.image_url ? `<img src="${a.image_url}" alt="${escHtml(a.title)}" />` : ''}
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
                                     <h6>${escHtml(a.title)}</h6>
-                                    <p>${escHtml(a.description?.slice(0, 100))}...</p>
+                                    <span class="badge-date">${a.date || ''}</span>
                                 </div>
-                                <span class="badge-date">${a.date || ''}</span>
+                                <p>${escHtml(a.description?.slice(0, 100))}...</p>
                             </div>
                         </div>
                     `).join('');
                 } else {
-                    container.innerHTML =
-                    `<p class="text-muted text-center py-3">কোনো কার্যক্রম পাওয়া যায়নি।</p>`;
+                    container.innerHTML = `<p class="text-muted text-center py-3">কোনো কার্যক্রম পাওয়া যায়নি।</p>`;
                 }
             } catch (e) { console.error(e); }
 
-            // Home Notices
+            // নোটিশ
             try {
-                const { data } = await supabase
-                    .from('notices')
-                    .select('*')
-                    .order('created_at', { ascending: false })
-                    .limit(3);
+                const { data } = await supabase.from('notices').select('*').order('created_at', { ascending: false }).limit(3);
                 const container = $('homeNotices');
                 if (data && data.length) {
                     container.innerHTML = data.map(n => `
                         <div class="notice-item">
                             <div class="d-flex justify-content-between align-items-start">
-                                <div>
-                                    <h6>${escHtml(n.title)}</h6>
-                                    <p>${escHtml(n.content?.slice(0, 80))}...</p>
-                                </div>
+                                <div><h6>${escHtml(n.title)}</h6><p>${escHtml(n.content?.slice(0, 80))}...</p></div>
                                 <span class="badge-date">${n.date || ''}</span>
                             </div>
                         </div>
@@ -1715,13 +1480,9 @@
                 }
             } catch (e) { console.error(e); }
 
-            // Home Gallery preview
+            // গ্যালারি প্রিভিউ (বড়)
             try {
-                const { data } = await supabase
-                    .from('gallery')
-                    .select('*')
-                    .order('created_at', { ascending: false })
-                    .limit(6);
+                const { data } = await supabase.from('gallery').select('*').order('created_at', { ascending: false }).limit(6);
                 const container = $('homeGallery');
                 if (data && data.length) {
                     container.innerHTML = data.map(g => `
@@ -1731,28 +1492,24 @@
                         </div>
                     `).join('');
                 } else {
-                    container.innerHTML =
-                    `<div class="col-12 text-center text-muted py-4">কোনো ছবি পাওয়া যায়নি।</div>`;
+                    container.innerHTML = `<div class="col-12 text-center text-muted py-4">কোনো ছবি পাওয়া যায়নি।</div>`;
                 }
             } catch (e) { console.error(e); }
         }
 
         // ================================================================
-        //  ACTIVITIES
+        //  ACTIVITIES, NOTICES, GALLERY LOAD FUNCTIONS
         // ================================================================
         async function loadActivities() {
             const container = $('activitiesList');
             container.innerHTML = `<div class="page-loader"><div class="loader"></div></div>`;
             try {
-                const { data } = await supabase
-                    .from('activities')
-                    .select('*')
-                    .order('created_at', { ascending: false });
+                const { data } = await supabase.from('activities').select('*').order('created_at', { ascending: false });
                 if (data && data.length) {
                     container.innerHTML = data.map(a => `
                         <div class="col-md-6 col-lg-4">
                             <div class="card-hover card h-100">
-                                ${a.image_url ? `<img src="${a.image_url}" class="card-img-top" style="height:200px;object-fit:cover;" alt="${escHtml(a.title)}" />` : ''}
+                                ${a.image_url ? `<img src="${a.image_url}" class="card-img-top" style="height:220px;object-fit:cover;" alt="${escHtml(a.title)}" />` : ''}
                                 <div class="card-body">
                                     <h5 class="card-title fw-bold text-primary-dark">${escHtml(a.title)}</h5>
                                     <p class="card-text text-muted small">${escHtml(a.date || '')}</p>
@@ -1762,8 +1519,7 @@
                         </div>
                     `).join('');
                 } else {
-                    container.innerHTML =
-                    `<div class="col-12 text-center text-muted py-5">কোনো কার্যক্রম পাওয়া যায়নি।</div>`;
+                    container.innerHTML = `<div class="col-12 text-center text-muted py-5">কোনো কার্যক্রম পাওয়া যায়নি।</div>`;
                 }
             } catch (e) {
                 container.innerHTML = `<div class="col-12 text-center text-danger">ডেটা লোড করতে সমস্যা হয়েছে।</div>`;
@@ -1771,25 +1527,16 @@
             }
         }
 
-        // ================================================================
-        //  NOTICES
-        // ================================================================
         async function loadNotices() {
             const container = $('noticesList');
             container.innerHTML = `<div class="page-loader"><div class="loader"></div></div>`;
             try {
-                const { data } = await supabase
-                    .from('notices')
-                    .select('*')
-                    .order('created_at', { ascending: false });
+                const { data } = await supabase.from('notices').select('*').order('created_at', { ascending: false });
                 if (data && data.length) {
                     container.innerHTML = data.map(n => `
                         <div class="notice-item">
                             <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                                <div>
-                                    <h6 class="fw-bold">${escHtml(n.title)}</h6>
-                                    <p>${escHtml(n.content || '')}</p>
-                                </div>
+                                <div><h6 class="fw-bold">${escHtml(n.title)}</h6><p>${escHtml(n.content || '')}</p></div>
                                 <span class="badge-date">${n.date || ''}</span>
                             </div>
                         </div>
@@ -1803,27 +1550,20 @@
             }
         }
 
-        // ================================================================
-        //  GALLERY
-        // ================================================================
         async function loadGallery() {
             const container = $('galleryList');
             container.innerHTML = `<div class="page-loader"><div class="loader"></div></div>`;
             try {
-                const { data } = await supabase
-                    .from('gallery')
-                    .select('*')
-                    .order('created_at', { ascending: false });
+                const { data } = await supabase.from('gallery').select('*').order('created_at', { ascending: false });
                 if (data && data.length) {
                     container.innerHTML = data.map(g => `
-                        <div class="col-6 col-md-4 col-lg-3 gallery-item">
+                        <div class="col-6 col-lg-4 gallery-item">
                             <img src="${g.image_url || 'https://via.placeholder.com/300'}" alt="${escHtml(g.title || 'Gallery')}" />
                             <div class="overlay">${escHtml(g.title || '')}</div>
                         </div>
                     `).join('');
                 } else {
-                    container.innerHTML =
-                    `<div class="col-12 text-center text-muted py-5">কোনো ছবি পাওয়া যায়নি।</div>`;
+                    container.innerHTML = `<div class="col-12 text-center text-muted py-5">কোনো ছবি পাওয়া যায়নি।</div>`;
                 }
             } catch (e) {
                 container.innerHTML = `<div class="col-12 text-center text-danger">ডেটা লোড করতে সমস্যা হয়েছে।</div>`;
@@ -1832,33 +1572,24 @@
         }
 
         // ================================================================
-        //  MEMBERSHIP FORM (ছবি ছাড়া)
+        //  MEMBERSHIP FORM
         // ================================================================
         $('membershipForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = $('membershipSubmitBtn');
             btn.disabled = true;
             btn.innerHTML = '<span class="loader" style="width:20px;height:20px;border-width:3px;"></span> প্রক্রিয়াকরণ...';
-
             try {
                 const name = $('memberName').value.trim();
                 const dob = $('memberDob').value;
                 const mobile = $('memberMobile').value.trim();
                 const email = $('memberEmail').value.trim();
                 const address = $('memberAddress').value.trim();
-
                 const { error } = await supabase.from('members').insert({
-                    name,
-                    birth_date: dob,
-                    mobile,
-                    email: email || null,
-                    address,
-                    photo_url: null,
+                    name, birth_date: dob, mobile, email: email || null, address, photo_url: null,
                     created_at: new Date().toISOString()
                 });
-
                 if (error) throw new Error(error.message);
-
                 showToast('🎉 সদস্য নিবন্ধন সফল হয়েছে!');
                 this.reset();
             } catch (err) {
@@ -1877,21 +1608,12 @@
             const btn = $('contactSubmitBtn');
             btn.disabled = true;
             btn.innerHTML = '<span class="loader" style="width:20px;height:20px;border-width:3px;"></span> পাঠানো হচ্ছে...';
-
             try {
                 const name = $('contactName').value.trim();
                 const email = $('contactEmail').value.trim();
                 const message = $('contactMessage').value.trim();
-
-                const { error } = await supabase.from('contacts').insert({
-                    name,
-                    email,
-                    message,
-                    created_at: new Date().toISOString()
-                });
-
+                const { error } = await supabase.from('contacts').insert({ name, email, message, created_at: new Date().toISOString() });
                 if (error) throw new Error(error.message);
-
                 showToast('✅ আপনার বার্তা পাঠানো হয়েছে!');
                 this.reset();
             } catch (err) {
@@ -1903,13 +1625,11 @@
         });
 
         // ================================================================
-        //  ADMIN AUTH
+        //  ADMIN AUTH & DASHBOARD
         // ================================================================
         async function handleAdminView() {
             const loginWrapper = $('adminLoginWrapper');
             const dashboard = $('adminDashboard');
-
-            // Check session
             const { data: { session } } = await supabase.auth.getSession();
             if (session) {
                 isAdmin = true;
@@ -1924,20 +1644,16 @@
             }
         }
 
-        // Admin Login
         $('adminLoginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = $('adminLoginBtn');
             btn.disabled = true;
             btn.innerHTML = '<span class="loader" style="width:20px;height:20px;border-width:3px;"></span> লগইন...';
-
             try {
                 const email = $('adminEmail').value.trim();
                 const password = $('adminPassword').value.trim();
-
-                const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+                const { error } = await supabase.auth.signInWithPassword({ email, password });
                 if (error) throw new Error(error.message);
-
                 showToast('✅ লগইন সফল!');
                 isAdmin = true;
                 $('adminLoginWrapper').style.display = 'none';
@@ -1953,7 +1669,6 @@
             }
         });
 
-        // Admin Logout
         $('adminLogoutBtn').addEventListener('click', async function(e) {
             e.preventDefault();
             await supabase.auth.signOut();
@@ -1963,9 +1678,6 @@
             showToast('লগআউট সম্পন্ন');
         });
 
-        // ================================================================
-        //  ADMIN DASHBOARD
-        // ================================================================
         async function loadAdminDashboard() {
             try {
                 const [members, activities, notices, contacts] = await Promise.all([
@@ -1982,7 +1694,7 @@
         }
 
         // ================================================================
-        //  ADMIN SIDEBAR NAV
+        //  ADMIN SIDEBAR & DATA LOADING
         // ================================================================
         $$('[data-admin-page]').forEach(el => {
             el.addEventListener('click', function(e) {
@@ -1998,9 +1710,6 @@
             });
         });
 
-        // ================================================================
-        //  ADMIN DATA LOADER
-        // ================================================================
         async function loadAdminData(type) {
             const containerMap = {
                 notices: 'adminNoticesList',
@@ -2012,7 +1721,6 @@
             const container = $(containerMap[type]);
             if (!container) return;
             container.innerHTML = `<div class="page-loader"><div class="loader"></div></div>`;
-
             try {
                 let data;
                 switch (type) {
@@ -2055,122 +1763,41 @@
         // ================================================================
         function renderNoticesTable(data) {
             if (!data || !data.length) return '<p class="text-muted text-center py-4">কোনো নোটিশ নেই।</p>';
-            return `
-                <div class="table-responsive">
-                    <table class="table table-hover admin-table">
-                        <thead><tr><th>শিরোনাম</th><th>তারিখ</th><th>অ্যাকশন</th></tr></thead>
-                        <tbody>
-                            ${data.map(n => `
-                                <tr>
-                                    <td><strong>${escHtml(n.title)}</strong><br/><small class="text-muted">${escHtml(n.content?.slice(0,60))}...</small></td>
-                                    <td>${n.date || ''}</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary me-1" onclick="editNotice('${n.id}')"><i class="fas fa-edit"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger" onclick="deleteItem('${n.id}','notices')"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                </div>
-            `;
+            return `<div class="table-responsive"><table class="table table-hover admin-table"><thead><tr><th>শিরোনাম</th><th>তারিখ</th><th>অ্যাকশন</th></tr></thead><tbody>
+                ${data.map(n => `<tr><td><strong>${escHtml(n.title)}</strong><br/><small class="text-muted">${escHtml(n.content?.slice(0,60))}...</small></td><td>${n.date || ''}</td><td><button class="btn btn-sm btn-outline-primary me-1" onclick="editNotice('${n.id}')"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-outline-danger" onclick="deleteItem('${n.id}','notices')"><i class="fas fa-trash"></i></button></td></tr>`).join('')}
+            </tbody></table></div>`;
         }
 
         function renderActivitiesTable(data) {
             if (!data || !data.length) return '<p class="text-muted text-center py-4">কোনো কার্যক্রম নেই।</p>';
-            return `
-                <div class="table-responsive">
-                    <table class="table table-hover admin-table">
-                        <thead><tr><th>ছবি</th><th>শিরোনাম</th><th>তারিখ</th><th>অ্যাকশন</th></tr></thead>
-                        <tbody>
-                            ${data.map(a => `
-                                <tr>
-                                    <td>${a.image_url ? `<img src="${a.image_url}" alt="img" />` : '-'}</td>
-                                    <td><strong>${escHtml(a.title)}</strong><br/><small class="text-muted">${escHtml(a.description?.slice(0,50))}...</small></td>
-                                    <td>${a.date || ''}</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary me-1" onclick="editActivity('${a.id}')"><i class="fas fa-edit"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger" onclick="deleteItem('${a.id}','activities')"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                </div>
-            `;
+            return `<div class="table-responsive"><table class="table table-hover admin-table"><thead><tr><th>ছবি</th><th>শিরোনাম</th><th>তারিখ</th><th>অ্যাকশন</th></tr></thead><tbody>
+                ${data.map(a => `<tr><td>${a.image_url ? `<img src="${a.image_url}" alt="img" />` : '-'}</td><td><strong>${escHtml(a.title)}</strong><br/><small class="text-muted">${escHtml(a.description?.slice(0,50))}...</small></td><td>${a.date || ''}</td><td><button class="btn btn-sm btn-outline-primary me-1" onclick="editActivity('${a.id}')"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-outline-danger" onclick="deleteItem('${a.id}','activities')"><i class="fas fa-trash"></i></button></td></tr>`).join('')}
+            </tbody></table></div>`;
         }
 
         function renderGalleryTable(data) {
             if (!data || !data.length) return '<p class="text-muted text-center py-4">কোনো ছবি নেই।</p>';
-            return `
-                <div class="table-responsive">
-                    <table class="table table-hover admin-table">
-                        <thead><tr><th>ছবি</th><th>শিরোনাম</th><th>অ্যাকশন</th></tr></thead>
-                        <tbody>
-                            ${data.map(g => `
-                                <tr>
-                                    <td><img src="${g.image_url || 'https://via.placeholder.com/50'}" alt="img" /></td>
-                                    <td>${escHtml(g.title || '')}</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-danger" onclick="deleteItem('${g.id}','gallery')"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                </div>
-            `;
+            return `<div class="table-responsive"><table class="table table-hover admin-table"><thead><tr><th>ছবি</th><th>শিরোনাম</th><th>অ্যাকশন</th></tr></thead><tbody>
+                ${data.map(g => `<tr><td><img src="${g.image_url || 'https://via.placeholder.com/50'}" alt="img" /></td><td>${escHtml(g.title || '')}</td><td><button class="btn btn-sm btn-outline-danger" onclick="deleteItem('${g.id}','gallery')"><i class="fas fa-trash"></i></button></td></tr>`).join('')}
+            </tbody></table></div>`;
         }
 
         function renderMembersTable(data) {
             if (!data || !data.length) return '<p class="text-muted text-center py-4">কোনো সদস্য নেই।</p>';
-            return `
-                <div class="table-responsive">
-                    <table class="table table-hover admin-table">
-                        <thead><tr><th>নাম</th><th>মোবাইল</th><th>ইমেইল</th><th>অ্যাকশন</th></tr></thead>
-                        <tbody>
-                            ${data.map(m => `
-                                <tr>
-                                    <td><strong>${escHtml(m.name)}</strong></td>
-                                    <td>${escHtml(m.mobile)}</td>
-                                    <td>${escHtml(m.email || '-')}</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-danger" onclick="deleteItem('${m.id}','members')"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                </div>
-            `;
+            return `<div class="table-responsive"><table class="table table-hover admin-table"><thead><tr><th>নাম</th><th>মোবাইল</th><th>ইমেইল</th><th>অ্যাকশন</th></tr></thead><tbody>
+                ${data.map(m => `<tr><td><strong>${escHtml(m.name)}</strong></td><td>${escHtml(m.mobile)}</td><td>${escHtml(m.email || '-')}</td><td><button class="btn btn-sm btn-outline-danger" onclick="deleteItem('${m.id}','members')"><i class="fas fa-trash"></i></button></td></tr>`).join('')}
+            </tbody></table></div>`;
         }
 
         function renderContactsTable(data) {
             if (!data || !data.length) return '<p class="text-muted text-center py-4">কোনো বার্তা নেই।</p>';
-            return `
-                <div class="table-responsive">
-                    <table class="table table-hover admin-table">
-                        <thead><tr><th>নাম</th><th>ইমেইল</th><th>বার্তা</th><th>তারিখ</th><th>অ্যাকশন</th></tr></thead>
-                        <tbody>
-                            ${data.map(c => `
-                                <tr>
-                                    <td><strong>${escHtml(c.name)}</strong></td>
-                                    <td>${escHtml(c.email)}</td>
-                                    <td><small>${escHtml(c.message?.slice(0,60))}...</small></td>
-                                    <td><small>${new Date(c.created_at).toLocaleDateString('bn-BD')}</small></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-danger" onclick="deleteItem('${c.id}','contacts')"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                </div>
-            `;
+            return `<div class="table-responsive"><table class="table table-hover admin-table"><thead><tr><th>নাম</th><th>ইমেইল</th><th>বার্তা</th><th>তারিখ</th><th>অ্যাকশন</th></tr></thead><tbody>
+                ${data.map(c => `<tr><td><strong>${escHtml(c.name)}</strong></td><td>${escHtml(c.email)}</td><td><small>${escHtml(c.message?.slice(0,60))}...</small></td><td><small>${new Date(c.created_at).toLocaleDateString('bn-BD')}</small></td><td><button class="btn btn-sm btn-outline-danger" onclick="deleteItem('${c.id}','contacts')"><i class="fas fa-trash"></i></button></td></tr>`).join('')}
+            </tbody></table></div>`;
         }
 
         // ================================================================
-        //  DELETE ITEM
+        //  DELETE, EDIT, FORM SUBMIT FUNCTIONS
         // ================================================================
         function deleteItem(id, table) {
             deleteTarget = id;
@@ -2182,7 +1809,6 @@
             if (!deleteTarget || !deleteType) return;
             this.disabled = true;
             this.innerHTML = '<span class="loader" style="width:16px;height:16px;border-width:3px;"></span>';
-
             try {
                 const { error } = await supabase.from(deleteType).delete().eq('id', deleteTarget);
                 if (error) throw new Error(error.message);
@@ -2203,9 +1829,6 @@
             }
         });
 
-        // ================================================================
-        //  EDIT NOTICE
-        // ================================================================
         async function editNotice(id) {
             try {
                 const { data } = await supabase.from('notices').select('*').eq('id', id).single();
@@ -2220,9 +1843,6 @@
             } catch (e) { showToast('ডেটা লোড করতে ব্যর্থ', 'error'); }
         }
 
-        // ================================================================
-        //  EDIT ACTIVITY
-        // ================================================================
         async function editActivity(id) {
             try {
                 const { data } = await supabase.from('activities').select('*').eq('id', id).single();
@@ -2234,8 +1854,7 @@
                 $('activityModalTitle').textContent = 'কার্যক্রম সম্পাদনা করুন';
                 $('activitySubmitBtn').textContent = 'আপডেট করুন';
                 if (data.image_url) {
-                    $('activityImagePreview').innerHTML =
-                        `<img src="${data.image_url}" class="image-preview" alt="Preview" style="max-width:120px;max-height:120px;border-radius:8px;object-fit:cover;border:2px solid #e8f0e8;margin-top:8px;" />`;
+                    $('activityImagePreview').innerHTML = `<img src="${data.image_url}" class="image-preview" alt="Preview" style="max-width:120px;max-height:120px;border-radius:8px;object-fit:cover;border:2px solid #e8f0e8;margin-top:8px;" />`;
                 } else {
                     $('activityImagePreview').innerHTML = '';
                 }
@@ -2243,25 +1862,19 @@
             } catch (e) { showToast('ডেটা লোড করতে ব্যর্থ', 'error'); }
         }
 
-        // ================================================================
-        //  NOTICE FORM SUBMIT
-        // ================================================================
+        // Notice Form Submit
         $('noticeForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = $('noticeSubmitBtn');
             btn.disabled = true;
             btn.innerHTML = '<span class="loader" style="width:20px;height:20px;border-width:3px;"></span>';
-
             try {
                 const id = $('noticeEditId').value;
                 const title = $('noticeTitle').value.trim();
                 const content = $('noticeContent').value.trim();
                 const date = $('noticeDate').value;
-
                 if (!title || !content || !date) throw new Error('সব ক্ষেত্র পূরণ করুন');
-
                 const payload = { title, content, date, updated_at: new Date().toISOString() };
-
                 if (id) {
                     const { error } = await supabase.from('notices').update(payload).eq('id', id);
                     if (error) throw new Error(error.message);
@@ -2272,7 +1885,6 @@
                     if (error) throw new Error(error.message);
                     showToast('✅ নতুন নোটিশ যোগ হয়েছে!');
                 }
-
                 bootstrap.Modal.getInstance($('noticeModal')).hide();
                 this.reset();
                 $('noticeEditId').value = '';
@@ -2289,39 +1901,30 @@
             }
         });
 
-        // ================================================================
-        //  ACTIVITY FORM SUBMIT
-        // ================================================================
+        // Activity Form Submit
         $('activityForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = $('activitySubmitBtn');
             btn.disabled = true;
             btn.innerHTML = '<span class="loader" style="width:20px;height:20px;border-width:3px;"></span>';
-
             try {
                 const id = $('activityEditId').value;
                 const title = $('activityTitle').value.trim();
                 const description = $('activityDescription').value.trim();
                 const date = $('activityDate').value;
                 const imageFile = $('activityImage').files[0];
-
                 if (!title || !description || !date) throw new Error('সব ক্ষেত্র পূরণ করুন');
-
                 let imageUrl = null;
                 if (imageFile) {
                     const ext = imageFile.name.split('.').pop();
                     const fileName = `activity_${Date.now()}.${ext}`;
-                    const { data: uploadData, error: uploadError } = await supabase.storage
-                        .from('activities')
-                        .upload(fileName, imageFile);
+                    const { error: uploadError } = await supabase.storage.from('activities').upload(fileName, imageFile);
                     if (uploadError) throw new Error('ছবি আপলোড ব্যর্থ: ' + uploadError.message);
                     const { data: urlData } = supabase.storage.from('activities').getPublicUrl(fileName);
                     imageUrl = urlData.publicUrl;
                 }
-
                 const payload = { title, description, date, updated_at: new Date().toISOString() };
                 if (imageUrl) payload.image_url = imageUrl;
-
                 if (id) {
                     const { error } = await supabase.from('activities').update(payload).eq('id', id);
                     if (error) throw new Error(error.message);
@@ -2332,7 +1935,6 @@
                     if (error) throw new Error(error.message);
                     showToast('✅ নতুন কার্যক্রম যোগ হয়েছে!');
                 }
-
                 bootstrap.Modal.getInstance($('activityModal')).hide();
                 this.reset();
                 $('activityEditId').value = '';
@@ -2350,51 +1952,39 @@
             }
         });
 
-        // Activity image preview
         $('activityImage').addEventListener('change', function() {
             const preview = $('activityImagePreview');
             preview.innerHTML = '';
             if (this.files && this.files[0]) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
-                    preview.innerHTML =
-                        `<img src="${e.target.result}" class="image-preview" alt="Preview" style="max-width:120px;max-height:120px;border-radius:8px;object-fit:cover;border:2px solid #e8f0e8;margin-top:8px;" />`;
+                    preview.innerHTML = `<img src="${e.target.result}" class="image-preview" alt="Preview" style="max-width:120px;max-height:120px;border-radius:8px;object-fit:cover;border:2px solid #e8f0e8;margin-top:8px;" />`;
                 };
                 reader.readAsDataURL(this.files[0]);
             }
         });
 
-        // ================================================================
-        //  GALLERY FORM SUBMIT
-        // ================================================================
+        // Gallery Form Submit
         $('galleryForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = $('gallerySubmitBtn');
             btn.disabled = true;
             btn.innerHTML = '<span class="loader" style="width:20px;height:20px;border-width:3px;"></span>';
-
             try {
                 const title = $('galleryTitle').value.trim();
                 const imageFile = $('galleryImage').files[0];
-
                 if (!imageFile) throw new Error('একটি ছবি নির্বাচন করুন');
-
                 const ext = imageFile.name.split('.').pop();
                 const fileName = `gallery_${Date.now()}.${ext}`;
-                const { data: uploadData, error: uploadError } = await supabase.storage
-                    .from('gallery')
-                    .upload(fileName, imageFile);
+                const { error: uploadError } = await supabase.storage.from('gallery').upload(fileName, imageFile);
                 if (uploadError) throw new Error('ছবি আপলোড ব্যর্থ: ' + uploadError.message);
                 const { data: urlData } = supabase.storage.from('gallery').getPublicUrl(fileName);
-
                 const { error } = await supabase.from('gallery').insert({
                     title: title || null,
                     image_url: urlData.publicUrl,
                     created_at: new Date().toISOString()
                 });
-
                 if (error) throw new Error(error.message);
-
                 showToast('✅ ছবি আপলোড হয়েছে!');
                 bootstrap.Modal.getInstance($('galleryModal')).hide();
                 this.reset();
@@ -2410,22 +2000,20 @@
             }
         });
 
-        // Gallery image preview
         $('galleryImage').addEventListener('change', function() {
             const preview = $('galleryImagePreview');
             preview.innerHTML = '';
             if (this.files && this.files[0]) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
-                    preview.innerHTML =
-                        `<img src="${e.target.result}" class="image-preview" alt="Preview" style="max-width:120px;max-height:120px;border-radius:8px;object-fit:cover;border:2px solid #e8f0e8;margin-top:8px;" />`;
+                    preview.innerHTML = `<img src="${e.target.result}" class="image-preview" alt="Preview" style="max-width:120px;max-height:120px;border-radius:8px;object-fit:cover;border:2px solid #e8f0e8;margin-top:8px;" />`;
                 };
                 reader.readAsDataURL(this.files[0]);
             }
         });
 
         // ================================================================
-        //  UTILITY: ESCAPE HTML
+        //  UTILITY
         // ================================================================
         function escHtml(str) {
             if (!str) return '';
@@ -2435,61 +2023,25 @@
         }
 
         // ================================================================
-        //  NAVBAR SCROLL EFFECT
-        // ================================================================
-        window.addEventListener('scroll', function() {
-            const nav = $('mainNav');
-            if (window.scrollY > 40) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // ================================================================
-        //  BOOTSTRAP MODAL CLEANUP
-        // ================================================================
-        document.querySelectorAll('.modal').forEach(m => {
-            m.addEventListener('hidden.bs.modal', function() {
-                const form = this.querySelector('form');
-                if (form) {
-                    const editId = form.querySelector('[id$="EditId"]');
-                    if (editId) editId.value = '';
-                }
-                this.querySelectorAll('.image-preview').forEach(el => el.remove());
-            });
-        });
-
-        // ================================================================
         //  INIT
         // ================================================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Set default date for forms
             const today = new Date().toISOString().split('T')[0];
-            const dateInputs = ['noticeDate', 'activityDate', 'memberDob'];
-            dateInputs.forEach(id => {
+            ['noticeDate', 'activityDate', 'memberDob'].forEach(id => {
                 const el = $(id);
                 if (el && !el.value) el.value = today;
             });
-
-            // Load home data
             loadHomeData();
-
-            // Check admin session on load
             handleAdminView();
-
             console.log('🚀 আল আকসা ফাউন্ডেশন ওয়েবসাইট সফলভাবে লোড হয়েছে!');
-            console.log('📌 Supabase সংযুক্ত: ✅');
         });
 
-        // Make functions global for inline onclick
         window.navigateTo = navigateTo;
         window.editNotice = editNotice;
         window.editActivity = editActivity;
         window.deleteItem = deleteItem;
     </script>
 
-    <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
     </script>
 
